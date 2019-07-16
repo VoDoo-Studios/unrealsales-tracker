@@ -53,9 +53,23 @@ class Grid extends React.PureComponent {
                 </div>
             )
         }
+        if (products.length === 1) {
+            return (
+                <div className="grid-noproducts">
+                    <h5>
+                        Looks like you haven't added anything to your list yet!
+                    </h5>
+                    <p>
+                        Try adding something now either by using "Add product" at the top of this page or drag and drop this link into you Bookmarks
+                        and press it when you are on a product page on Unreal Marketplace.
+                    </p>
+                </div>
+            )
+        }
+        console.log(products, products.length);
         return (
             <CardColumns className="grid">
-                {products.length > 0 && products.map((product) => {
+                {products.length > 1 && products.map((product) => {
                     if (product === 'empty') return null;
                     return (
                         <Product
