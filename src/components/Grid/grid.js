@@ -66,7 +66,6 @@ class Grid extends React.PureComponent {
                 </div>
             )
         }
-        console.log(products, products.length);
         return (
             <CardColumns className="grid">
                 {products.length > 1 && products.map((product) => {
