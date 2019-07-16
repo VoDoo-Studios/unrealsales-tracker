@@ -1,0 +1,11 @@
+.grid {
+    padding: 1rem;
+    border-width: .2rem .2rem 0;
+    border: 0.12rem solid #ececec;
+    border-radius: 8px 8px 0 0;
+}
+.grid-loader {
+    margin-top: 200px;
+    text-align: center;
+    height:100vh;
+}

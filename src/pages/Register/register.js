@@ -70,9 +70,9 @@ class Register extends React.PureComponent {
   render() {
     const { isProcessing, updateForm, registerForm, handleSubmit } = this.props;
     return (
-      <Container fluid className="unreal-tracker__register-page">
+      <Container className="register-page">
         <Header/>
-        <Row>
+        <Row className="register-page__content">
             <Col xs={12} md={6}>
                 <Form noValidate validated={registerForm.validated} onSubmit={handleSubmit(registerForm)}>
                     <h3>Register for a free account</h3>

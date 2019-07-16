@@ -80,9 +80,9 @@ class Login extends React.PureComponent {
     render() {
         const { updateForm, loginForm, isProcessing, handleSubmit } = this.props;
         return (
-            <Container fluid className="unreal-tracker__login-page">
+            <Container className="login-page">
                 <Header />
-                <Row>
+                <Row className="login-page__content">
                     <Col md={{ span: 6, offset: 3 }}>
                         <Form noValidate validated={loginForm.validated} onSubmit={handleSubmit(loginForm)}>
                             {loginForm.invalidLogin &&
@@ -128,6 +128,9 @@ class Login extends React.PureComponent {
                                 }
                                 Log in
                             </Button>
+                            <a className="ml-3" href="#" onClick={() => {window.tracker.appHistory.push('/tracker/register')}}>
+                                or Create an account for free
+                            </a>
                         </Form>
                     </Col>
                 </Row>

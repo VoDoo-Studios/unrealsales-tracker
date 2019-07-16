@@ -1,17 +1,20 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Spinner, Card, Button, Badge } from 'react-bootstrap';
+import { Card, Badge } from 'react-bootstrap';
+import { FaExternalLinkAlt } from 'react-icons/fa';
 import ReadMoreReact from 'read-more-react';
+import RemoveProduct from './removeproduct';
 
 import { setProcessingForm } from '../../actions/appActions';
-import { getProduct } from '../../actions/productsActions';
+import { postProduct, setProduct } from '../../actions/productsActions';
 
 import './product.css';
 
 const mapDispatchToProps = (dispatch) => {
     return {
         setProcessingForm: (form, value) => dispatch(setProcessingForm(form, value)),
-        getProduct: (slug) => dispatch(getProduct(slug)),
+        getProduct: (slug) => dispatch(postProduct(slug)),
+        setProduct: (slug, productData) => dispatch(setProduct(slug, productData)),
     }
 }
 const mapStateToProps = (state, ownProps) => {
@@ -27,16 +30,19 @@ const mapStateToProps = (state, ownProps) => {
 
 class Product extends React.PureComponent {
     async componentDidMount() {
-        const { getProduct, slug, product } = this.props;
+        const { getProduct, setProduct, slug, product } = this.props;
         try {
-            console.log(product);
             if (Object.keys(product).length === 0) {
-                await getProduct(slug);
+                let productData = await getProduct(slug);
+                if (productData.title) {
+                    setProduct(slug, productData)
+                }
             }
         } catch(e) {
             console.error(e);
         }
     }
+  
     render() {
         const { product, slug } = this.props
         if (!product) {
@@ -45,10 +51,22 @@ class Product extends React.PureComponent {
                 </Card>
             )
         }
-        console.log(product, "#" + this.stringToColour(product.categories[0].name));
         return (
             <Card style={{ maxWidth: '17rem' }} className="product">
-                <Card.Img variant="top" src={product.thumbnail} />
+                <div className="product__image-container">
+                    <Card.Img variant="top" src={product.thumbnail} />
+                    <div className="product__image-overlay">
+                        <a 
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            href={'https://www.unrealengine.com/marketplace/en-US/slug/' + slug}
+                        >
+                            <FaExternalLinkAlt size='2rem'/>
+                        </a>
+                        <RemoveProduct slug={slug}/>
+                    </div>
+                </div>
+
                 <Card.Body>
                     <Badge variant="secondary"> {product.price} </Badge>
                     <Badge variant="info" className="product__category" style={{ 
@@ -57,14 +75,10 @@ class Product extends React.PureComponent {
                         {product.categories[0].name}
                     </Badge>
                     <Card.Title>{product.title}</Card.Title>
-                    <Card.Text>
+                    <Card.Text as="div">
                         <ReadMoreReact text={product.description}
-                            min={70}
-                            ideal={90}
-                            max={110}
                             readMoreText="See more"/>
                     </Card.Text>
-                    <Button target="_blank" href={'https://www.unrealengine.com/marketplace/en-US/slug/' + slug} variant="primary">Visit store page</Button>
                 </Card.Body>
             </Card>
         )

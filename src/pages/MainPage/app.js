@@ -4,6 +4,7 @@ import { Container } from 'react-bootstrap';
 
 import Header from '../../components/Header/header';
 import Grid from '../../components/Grid/grid';
+import AddProduct from '../../components/AddProduct/addproduct';
 
 import './app.css';
 
@@ -24,9 +25,14 @@ class App extends React.PureComponent {
         }
     }
     render() {
+        const { userToken } = this.props;
+        if (!userToken) {
+            return null;
+        }
         return (
-            <Container fluid className="unreal-tracker">
+            <Container  className="list-page">
                 <Header/>
+                <AddProduct/>
                 <Grid/>
             </Container>
         )

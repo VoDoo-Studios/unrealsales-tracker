@@ -1,3 +1,47 @@
+export const addProductToList = (slug, listId) => {
+    return async (dispatch, getState) => {
+        return fetch('https://api.unrealsales.io/dev/lists/products', {
+            method: 'POST',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + getState().app.userToken,
+            },
+            body: JSON.stringify({
+                slug: slug,
+                listId: listId
+            }),
+        })
+        .then(response => {
+            if (response.ok) {
+                return response.text();
+            }
+            throw response;
+        })
+    }
+}
+export const removeProductFromList = (slug, listId) => {
+    return async (dispatch, getState) => {
+        return fetch('https://api.unrealsales.io/dev/lists/products', {
+            method: 'DELETE',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + getState().app.userToken,
+            },
+            body: JSON.stringify({
+                slug: slug,
+                listId: listId
+            }),
+        })
+        .then(response => {
+            if (response.ok) {
+                return response.text();
+            }
+            throw response;
+        })
+    }
+}
 export const getLists = () => {
     return (dispatch, getState) => {
         return fetch('https://api.unrealsales.io/dev/lists', {

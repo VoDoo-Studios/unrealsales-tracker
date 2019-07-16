@@ -44,18 +44,19 @@ class Grid extends React.PureComponent {
         const { isProcessing, products } = this.props;
         if (isProcessing) {
             return (
-                <>
+                <div className="grid-loader">
                     <Spinner animation="border" size="sm" />
                     <Spinner animation="border" />
                     <Spinner animation="grow" size="sm" />
                     <Spinner animation="grow" />
                     <span className="sr-only">Loading...</span>
-                </>
+                </div>
             )
         }
         return (
             <CardColumns className="grid">
                 {products.length > 0 && products.map((product) => {
+                    if (product === 'empty') return null;
                     return (
                         <Product
                             key={product}

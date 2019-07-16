@@ -98,5 +98,15 @@ functions:
           authorizer: 
             name: authorize
             resultTtlInSeconds: 0
+  removeFromList:
+    handler: functions/lists.removeFromList
+    events:
+      - http:
+          method: DELETE
+          path: /lists/products
+          cors: true
+          authorizer: 
+            name: authorize
+            resultTtlInSeconds: 0
 resources:
   - ${file(resources/dynamodb-tables.yml)}

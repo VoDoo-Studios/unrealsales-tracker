@@ -3,7 +3,9 @@ const products = (state = {}, data) => {
         case 'SET_PRODUCT':
             return {
                 ...state,
-                ...data,
+                [data.slug]: {
+                    ...data.productData,
+                },
             }
         default:
             return state;
