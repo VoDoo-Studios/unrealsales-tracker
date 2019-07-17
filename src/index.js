@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 
 import { Provider } from 'react-redux'
 import { createStore, compose, applyMiddleware } from 'redux';
-import { Router, Route, Switch } from 'react-router-dom';
+import { Router, Route, Switch, Redirect } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import thunk from 'redux-thunk';
 import * as serviceWorker from './serviceWorker';
@@ -41,6 +41,7 @@ ReactDOM.render(
     <Provider store={store}>
         <Router history={history}>
             <Switch>
+                <Route exact path="/" render={() => (<Redirect to="/tracker/"/>)}/>
                 <Route exact path="/tracker/" component={App}/>
                 <Route exact path="/tracker/register" component={Register}/>
                 <Route exact path="/tracker/login" component={Login}/>
