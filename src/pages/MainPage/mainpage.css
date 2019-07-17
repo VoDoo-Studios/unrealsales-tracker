@@ -1,0 +1,24 @@
+.main-page {
+    box-shadow: #ececec 1px 1px 20px 8px;
+    min-height:100vh;
+}
+.main-page .unreal-tracker__header {
+    border-bottom: none;
+}
+.main-page .jumbotron {
+    height:400px;
+    color:#efefef;
+    background-position:0% 48%;
+}
+.main-page .jumbotron p {
+    max-width:30rem;
+}
+.main-page .row {
+    margin-bottom:40px;
+}
+.main-page__cta h2{
+    margin:40px auto;
+}
+.main-page .col-sm-12 {
+    margin-top:20px;
+}

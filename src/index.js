@@ -11,7 +11,8 @@ import * as serviceWorker from './serviceWorker';
 import unrealTracker from './reducers/';
 
 import './index.css';
-import App from './pages/MainPage/app';
+import MainPage from './pages/MainPage/mainpage';
+import Tracker from './pages/TrackerPage/tracker';
 import Register from './pages/Register/register';
 import Login from './pages/LoginPage/login';
 import ExtAdd from './pages/ExtAddPage/extadd';
@@ -41,8 +42,8 @@ ReactDOM.render(
     <Provider store={store}>
         <Router history={history}>
             <Switch>
-                <Route exact path="/" render={() => (<Redirect to="/tracker/"/>)}/>
-                <Route exact path="/tracker/" component={App}/>
+                <Route exact path="/" component={MainPage}/>
+                <Route exact path="/tracker/" component={Tracker}/>
                 <Route exact path="/tracker/register" component={Register}/>
                 <Route exact path="/tracker/login" component={Login}/>
                 <Route exact path="/tracker/add" component={ExtAdd}/>

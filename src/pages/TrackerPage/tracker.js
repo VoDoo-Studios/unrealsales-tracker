@@ -6,7 +6,7 @@ import Header from '../../components/Header/header';
 import Grid from '../../components/Grid/grid';
 import AddProduct from '../../components/AddProduct/addproduct';
 
-import './app.css';
+import './tracker.css';
 
 const mapStateToProps = (state) => {
     const userToken = state.app.userToken;
@@ -16,7 +16,7 @@ const mapStateToProps = (state) => {
     };
 };
 
-class App extends React.PureComponent {
+class Tracker extends React.PureComponent {
     componentDidMount() {
         const { userToken } = this.props;
 
@@ -39,4 +39,4 @@ class App extends React.PureComponent {
     }
 }
 
-export default App = connect(mapStateToProps, null)(App);
+export default Tracker = connect(mapStateToProps, null)(Tracker);
