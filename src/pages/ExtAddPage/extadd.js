@@ -40,7 +40,6 @@ class ExtAdd extends React.PureComponent {
     componentDidMount() {
         const { userToken, listId, getLists } = this.props;
         const  { slug, url } = this.getUrlParameter('product');
-        console.log(slug, url);
         if (!slug || !url) {
             this.setState({
                 invalidLink: true,
