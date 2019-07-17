@@ -2,3 +2,7 @@
     font-size:1.8rem;
     color:rgba(10, 106, 179, 0.9);
 }
+.unreal-tracker__header {
+    border-bottom:0.22rem solid #ececec;
+    margin: 0 -15px;
+}

@@ -35,7 +35,9 @@ class RemoveProduct extends React.PureComponent {
         };
     }
 
-    showRemoveConfirmation() {
+    showRemoveConfirmation(event) {
+        event.preventDefault();
+        event.stopPropagation();
         this.setState({
             removeConfirmation: !this.state.removeConfirmation
         })
@@ -57,7 +59,7 @@ class RemoveProduct extends React.PureComponent {
         return (
             <>
                 <a
-                    href="#"
+                    href=""
                     className="product__remove"
                     onClick={this.showRemoveConfirmation.bind(this)}
                 >

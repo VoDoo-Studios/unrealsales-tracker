@@ -11,8 +11,9 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-.container-fluid {
-  padding:0 40px;
+.container > .row {
+  padding-left:40px;
+  padding-right:40px;
 }
 .spinner-grow-sm {
   margin-right: 0.5rem;

@@ -29,7 +29,7 @@ const mapDispatchToProps = (dispatch) => {
             
             if (isValid) {
                 dispatch(setProcessingForm('loginForm', true));
-                return fetch('https://api.unrealsales.io/dev/profile/login', {
+                return fetch(window.tracker.api_endpoint + 'profile/login', {
                     method: 'POST',
                     mode: 'cors',
                     headers: {
@@ -128,7 +128,7 @@ class Login extends React.PureComponent {
                                 }
                                 Log in
                             </Button>
-                            <a className="ml-3" href="#" onClick={() => {window.tracker.appHistory.push('/tracker/register')}}>
+                            <a className="ml-3" href="" onClick={(event) => {event.preventDefault();event.stopPropagation();window.tracker.appHistory.push('/tracker/register')}}>
                                 or Create an account for free
                             </a>
                         </Form>

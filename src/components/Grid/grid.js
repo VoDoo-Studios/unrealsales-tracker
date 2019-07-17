@@ -60,7 +60,8 @@ class Grid extends React.PureComponent {
                         Looks like you haven't added anything to your list yet!
                     </h5>
                     <p>
-                        Try adding something now either by using "Add product" at the top of this page or drag and drop this link into you Bookmarks
+                        Try adding something now either by using "Add product" at the top of this page or drag and drop this link
+                        (<a href={this.constructAddLink()}>Add to Wishlist</a>)  into you Bookmarks
                         and press it when you are on a product page on Unreal Marketplace.
                     </p>
                 </div>
@@ -79,6 +80,11 @@ class Grid extends React.PureComponent {
                 })}
             </CardColumns>
         )
+    }
+    constructAddLink() {
+        let href = window.location.href;
+        let link = href + (href.substring(href.length-1) === '/' ? '' : '/') + 'add?product=';
+        return 'javascript:(function(){f="' + link + '"+window.location.href;location.href=f;})()'
     }
 }
 

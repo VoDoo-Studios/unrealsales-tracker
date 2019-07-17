@@ -14,6 +14,8 @@ import './index.css';
 import App from './pages/MainPage/app';
 import Register from './pages/Register/register';
 import Login from './pages/LoginPage/login';
+import ExtAdd from './pages/ExtAddPage/extadd';
+import Terms from './pages/TermsPage/terms';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -30,6 +32,11 @@ let store = createStore(
 const history = createBrowserHistory();
 window.tracker.appHistory = history;
 
+// Delegate api url
+window.tracker.api_endpoint = 'https://api.unrealsales.io/prod/';
+if (window.location.href.indexOf("localhost") > -1) {
+    window.tracker.api_endpoint = 'https://api.unrealsales.io/dev/';
+}
 ReactDOM.render(
     <Provider store={store}>
         <Router history={history}>
@@ -37,6 +44,8 @@ ReactDOM.render(
                 <Route exact path="/tracker/" component={App}/>
                 <Route exact path="/tracker/register" component={Register}/>
                 <Route exact path="/tracker/login" component={Login}/>
+                <Route exact path="/tracker/add" component={ExtAdd}/>
+                <Route exact path="/tracker/terms-conditions" component={Terms}/>
             </Switch>
         </Router>
     </Provider>,

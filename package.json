@@ -20,7 +20,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "upload": "aws s3 sync build/ s3://unrealsales-tracker",
+    "deploy": "npm run build && npm run upload"
   },
   "eslintConfig": {
     "extends": "react-app"

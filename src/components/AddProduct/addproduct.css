@@ -3,8 +3,10 @@
     padding: 1rem;
     padding-left: 1rem;
     border-bottom: 0.22rem solid #ececec;
-    border-top: 0.22rem solid #ececec;
 }
 .addproduct__trigger > span {
     margin-left:.3rem;
+}
+.addproduct__trigger-container small{
+    margin-left: 1rem;
 }

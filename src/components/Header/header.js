@@ -25,19 +25,19 @@ class Header extends React.PureComponent {
         const { userToken } = this.props;
         return (
             <Navbar expand="lg" className="unreal-tracker__header">
-                <Navbar.Brand href="#" onClick={this.redirect.bind(this, '/tracker/')}>UnrealSales</Navbar.Brand>
+                <Navbar.Brand href="" onClick={this.redirect.bind(this, '/tracker/')}>UnrealSales</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto">
-                        <Nav.Link href="#" onClick={this.redirect.bind(this, '/tracker/')}>Tracker</Nav.Link>
+                        <Nav.Link href="" onClick={this.redirect.bind(this, '/tracker/')}>Tracker</Nav.Link>
                         {!userToken && 
                             <>
-                                <Nav.Link href="#" onClick={this.redirect.bind(this, '/tracker/login')}>Login</Nav.Link>
-                                <Nav.Link href="#" onClick={this.redirect.bind(this, '/tracker/register')}>Register</Nav.Link>
+                                <Nav.Link href="" onClick={this.redirect.bind(this, '/tracker/login')}>Login</Nav.Link>
+                                <Nav.Link href="" onClick={this.redirect.bind(this, '/tracker/register')}>Register</Nav.Link>
                             </>
                         }
                         {userToken &&
-                            <Nav.Link href="#" onClick={this.logout.bind(this)}>Logout</Nav.Link>
+                            <Nav.Link href="" onClick={this.logout.bind(this)}>Logout</Nav.Link>
                         }
                     </Nav>
                 </Navbar.Collapse>

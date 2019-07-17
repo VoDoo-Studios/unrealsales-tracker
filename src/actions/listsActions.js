@@ -1,6 +1,6 @@
 export const addProductToList = (slug, listId) => {
     return async (dispatch, getState) => {
-        return fetch('https://api.unrealsales.io/dev/lists/products', {
+        return fetch(window.tracker.api_endpoint + 'lists/products', {
             method: 'POST',
             mode: 'cors',
             headers: {
@@ -22,7 +22,7 @@ export const addProductToList = (slug, listId) => {
 }
 export const removeProductFromList = (slug, listId) => {
     return async (dispatch, getState) => {
-        return fetch('https://api.unrealsales.io/dev/lists/products', {
+        return fetch(window.tracker.api_endpoint + 'lists/products', {
             method: 'DELETE',
             mode: 'cors',
             headers: {
@@ -44,7 +44,7 @@ export const removeProductFromList = (slug, listId) => {
 }
 export const getLists = () => {
     return (dispatch, getState) => {
-        return fetch('https://api.unrealsales.io/dev/lists', {
+        return fetch(window.tracker.api_endpoint + 'lists', {
             method: 'GET',
             mode: 'cors',
             headers: {

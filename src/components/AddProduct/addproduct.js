@@ -52,7 +52,7 @@ class AddProduct extends React.PureComponent {
     }
     async onSave() {
         const { addProduct, setProduct, addProductToList, getLists, listId, setProcessingForm } = this.props;
-        let regex = /^https:\/\/www\.unrealengine\.com\/marketplace\/(.*)\/slug\/([a-z0-9-]+)(\/|)$/i;
+        let regex = /^https:\/\/(www\.|)unrealengine\.com\/marketplace\/(.*)\/slug\/([a-z0-9-]+)(\/|)$/i;
         let slugMatches = this.state.newSlug.match(regex);
         if (!slugMatches) {
             return this.setState({
@@ -60,7 +60,7 @@ class AddProduct extends React.PureComponent {
             });
         }
         setProcessingForm('addingProduct', true);
-        let slug = slugMatches[2]
+        let slug = slugMatches[3]
         let productData = await addProduct(slug);
         await addProductToList(slug, listId);
         setProduct(slug, productData);
@@ -75,12 +75,13 @@ class AddProduct extends React.PureComponent {
     
     render() {
         const { isProcessing } = this.props;
+
         return (
                 <Row className="addproduct">
-                    <Col md={12}>
+                    <Col md={12} className="addproduct__trigger-container">
                         <a 
                             className="addproduct__trigger"
-                            href="#" 
+                            href="" 
                             onClick={this.onShowClick.bind(this)}
                             aria-controls="addproduct-collapse"
                             aria-expanded={this.state.showAddProduct}>
@@ -93,6 +94,11 @@ class AddProduct extends React.PureComponent {
                                 <span>Add product</span>
 
                         </a>
+                        <small>
+                            or drag this link 
+                            (<a href={this.constructAddLink()}>Add to Wishlist</a>) 
+                            to you Bookmarks bar and press it when you're on a UE4 marketplace product page
+                        </small>
                     </Col>
                     <Col md={12}>
                         <Collapse in={this.state.showAddProduct}>
@@ -126,6 +132,11 @@ class AddProduct extends React.PureComponent {
                     </Col>
                 </Row>
         )
+    }
+    constructAddLink() {
+        let href = window.location.href;
+        let link = href + (href.substring(href.length-1) === '/' ? '' : '/') + 'add?product=';
+        return 'javascript:(function(){f="' + link + '"+window.location.href;location.href=f;})()'
     }
 }
 

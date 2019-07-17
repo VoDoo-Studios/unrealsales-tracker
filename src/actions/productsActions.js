@@ -1,7 +1,7 @@
 
 export const postProduct = (slug) => {
     return (dispatch, getState) => {
-        return fetch('https://api.unrealsales.io/dev/products', {
+        return fetch(window.tracker.api_endpoint + 'products', {
             method: 'POST',
             mode: 'cors',
             headers: {

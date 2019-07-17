@@ -26,7 +26,7 @@ const mapDispatchToProps = (dispatch) => {
             
             if (isValid) {
                 dispatch(setProcessingForm('registrationForm', true));
-                return fetch('https://api.unrealsales.io/dev/profile/register', {
+                return fetch(window.tracker.api_endpoint + 'profile/register', {
                     method: 'POST',
                     mode: 'cors',
                     headers: {
@@ -144,7 +144,7 @@ class Register extends React.PureComponent {
                             name="terms" 
                             onChange={updateForm.bind(this)} 
                             type="checkbox" 
-                            label="I agree to the terms and conditions" />
+                            label={(<span>I agree to the <a onClick={(event) => {event.preventDefault();event.stopPropagation();window.tracker.appHistory.push('/tracker/terms-conditions')}} href="">terms and conditions</a></span>)} />
                             <Form.Control.Feedback type="invalid">
                                 It's this or we make our lawyers meet, but let's use this first.
                             </Form.Control.Feedback>
@@ -165,7 +165,7 @@ class Register extends React.PureComponent {
                         <h5>Create your wishlist of products</h5>
                         <p>
                             Add products to your tracker list with one click using our 
-                            browser extension directly from Unreal Marketplace.
+                            Bookmarklet directly from Unreal Marketplace.
                         </p>
                         </Media.Body>
                     </Media>
