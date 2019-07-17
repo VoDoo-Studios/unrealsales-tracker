@@ -2,7 +2,6 @@
   "name": "unrealsales-tracker",
   "version": "0.1.0",
   "private": true,
-  "homepage": "/tracker/",
   "dependencies": {
     "react": "^16.8.6",
     "react-bootstrap": "^1.0.0-beta.9",
@@ -21,7 +20,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "upload": "aws s3 sync build/ s3://unrealsales-tracker",
+    "upload": "aws s3 sync build/ s3://unrealsales-tracker --acl public-read --cache-control public,max-age=604800",
     "deploy": "npm run build && npm run upload"
   },
   "eslintConfig": {
