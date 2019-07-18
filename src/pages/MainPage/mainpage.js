@@ -7,27 +7,8 @@ import imgOverview from '../../images/overview.png';
 
 import './mainpage.css';
 
-const mapStateToProps = (state) => {
-    const userToken = state.app.userToken;
-
-    return {
-        userToken,
-    };
-};
-
 class MainPage extends React.PureComponent {
-    componentDidMount() {
-        const { userToken } = this.props;
-
-        if (!userToken) {
-            window.tracker.appHistory.push('/tracker/login/');
-        }
-    }
     render() {
-        const { userToken } = this.props;
-        if (!userToken) {
-            return null;
-        }
         return (
             <Container  className="main-page">
                 <Header/>
@@ -125,4 +106,4 @@ class MainPage extends React.PureComponent {
     }
 }
 
-export default MainPage = connect(mapStateToProps, null)(MainPage);
+export default MainPage = connect(null, null)(MainPage);

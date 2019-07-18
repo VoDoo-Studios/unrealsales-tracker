@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 
 import { Provider } from 'react-redux'
 import { createStore, compose, applyMiddleware } from 'redux';
-import { Router, Route, Switch, Redirect } from 'react-router-dom';
+import { Router, Route, Switch } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import thunk from 'redux-thunk';
 import * as serviceWorker from './serviceWorker';
