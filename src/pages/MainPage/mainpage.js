@@ -68,10 +68,9 @@ class MainPage extends React.PureComponent {
                                 <Badge pill variant="success">
                                     Coming soon
                                 </Badge>
-                                <Card.Title>Multiple lists</Card.Title>
+                                <Card.Title>Collaborate</Card.Title>
                                 <Card.Text>
-                                    Create a list for every project, you can manage multiple
-                                    lists.
+                                    Share your list with your team and collaborate together.
                                 </Card.Text>
                             </Card.Body>
                         </Card>
