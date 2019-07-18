@@ -8,7 +8,12 @@ import { setProcessingForm, setUserToken } from '../../actions/appActions';
 import Header from '../../components/Header/header';
 
 import './login.css';
-
+const getUrlParameter = (name) => {
+    name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+    let regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+    let results = regex.exec(window.location.search);
+    return results && results.length > 0 ? decodeURIComponent(results[1].replace(/\+/g, ' ')) : false;
+};
 const mapDispatchToProps = (dispatch) => {
     return {
         updateForm: (data) => {
@@ -50,7 +55,11 @@ const mapDispatchToProps = (dispatch) => {
                     dispatch(setUserToken(response.userToken));
                     dispatch(setProcessingForm('loginForm', false));
                     dispatch(clearLoginForm());
-                    window.tracker.appHistory.push('/tracker/');
+                    if (getUrlParameter('product')) {
+                        window.tracker.appHistory.push('/tracker/add?product=' + getUrlParameter('product'));
+                    } else {
+                        window.tracker.appHistory.push('/tracker/');
+                    }
                 })
                 .catch(err => {
                     if (err.status === 401) {
