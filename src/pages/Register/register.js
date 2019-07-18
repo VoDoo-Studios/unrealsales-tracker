@@ -43,9 +43,10 @@ const mapDispatchToProps = (dispatch) => {
                     throw response;
                 })
                 .then(() => {
+                    window.ga('send', 'event', { eventCategory: 'Register', eventAction: 'Registered'});
                     dispatch(setProcessingForm('registrationForm', false));
                     dispatch(clearRegistrationForm());
-                    window.tracker.appHistory.push('/tracker/');
+                    window.tracker.appHistory.push('/tracker/login');
                 })
                 .catch(err => {
                     dispatch(setProcessingForm('registrationForm', false));
@@ -76,36 +77,6 @@ class Register extends React.PureComponent {
             <Col xs={12} md={6}>
                 <Form noValidate validated={registerForm.validated} onSubmit={handleSubmit(registerForm)}>
                     <h3>Register for a free account</h3>
-                    <Form.Group controlId="formBasicName">
-                        <Form.Row>
-                            <Col>
-                                <Form.Label>First name</Form.Label>
-                                <Form.Control
-                                    required
-                                    defaultValue={registerForm.first_name} 
-                                    name="first_name" 
-                                    onChange={updateForm.bind(this)} 
-                                    type="text" 
-                                    placeholder="John" />
-                                    <Form.Control.Feedback type="invalid">
-                                        We have to be on first name basis if you want to use our application
-                                    </Form.Control.Feedback>
-                            </Col>
-                            <Col>
-                                <Form.Label>Last name</Form.Label>
-                                <Form.Control
-                                    required
-                                    defaultValue={registerForm.last_name} 
-                                    name="last_name" 
-                                    onChange={updateForm.bind(this)} 
-                                    type="text" 
-                                    placeholder="Doe" />
-                                    <Form.Control.Feedback type="invalid">
-                                        You must have a last name, everybody has one.
-                                    </Form.Control.Feedback>
-                            </Col>
-                        </Form.Row>  
-                    </Form.Group>
                     <Form.Group controlId="formBasicEmail">
                         <Form.Label>Email address</Form.Label>
                         <Form.Control 
