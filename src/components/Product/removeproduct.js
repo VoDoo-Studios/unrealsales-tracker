@@ -48,10 +48,8 @@ class RemoveProduct extends React.PureComponent {
         setProcessingForm('removingProduct', true);
         await removeProductFromList(slug, listId);
         await getLists();
+        window.gtag('event', 'tracker', {'type': 'delete', 'slug': slug})
         setProcessingForm('removingProduct', false);
-        this.setState({
-            removeConfirmation: !this.state.removeConfirmation
-        })
     }
 
     render() {

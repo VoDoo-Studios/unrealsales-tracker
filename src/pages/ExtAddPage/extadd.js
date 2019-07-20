@@ -68,6 +68,7 @@ class ExtAdd extends React.PureComponent {
         if (listId !== prevProps.listId) {
             await addProduct(slug);
             await addProductToList(slug, listId);
+            window.gtag('event', 'add_product', {'method': 'external'});
             window.location = url;
         }
     }

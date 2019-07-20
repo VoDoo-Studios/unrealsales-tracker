@@ -59,6 +59,7 @@ class Product extends React.PureComponent {
                         <a 
                             target="_blank"
                             rel="noopener noreferrer"
+                            onClick={() => {window.gtag('event', 'tracker', {'type': 'visit_product', 'slug': slug});}}
                             href={'https://www.unrealengine.com/marketplace/en-US/slug/' + slug}
                         >
                             <FaExternalLinkAlt size='2rem'/>

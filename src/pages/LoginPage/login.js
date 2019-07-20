@@ -69,6 +69,7 @@ class Login extends React.PureComponent {
                 setUserToken(userProfile.userToken);
                 setProcessingForm('loginForm', false);
                 clearLoginForm();
+                window.gtag('event', 'login', {'result': 'succesful'});
                 if (getUrlParameter('product')) {
                     window.tracker.appHistory.push('/tracker/add?product=' + getUrlParameter('product'));
                 } else {
@@ -80,6 +81,7 @@ class Login extends React.PureComponent {
                 } else {
                     setLoginForm({systemFail: true});
                 }
+                window.gtag('event', 'login', {'result': 'error'});
                 setProcessingForm('loginForm', false);
                 console.error(err);
             }

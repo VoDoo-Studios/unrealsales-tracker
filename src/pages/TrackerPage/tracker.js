@@ -21,6 +21,7 @@ class Tracker extends React.PureComponent {
         const { userToken } = this.props;
 
         if (!userToken) {
+            window.gtag('event', 'tracker', {'type': 'loggedout'});
             window.tracker.appHistory.push('/tracker/login/');
         }
     }
