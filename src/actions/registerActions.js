@@ -20,3 +20,54 @@ export const clearRegistrationForm = () => {
         type: 'CLEAR_REGISTRATION_FORM',
     };
 };
+export const loginUser = (formData) => {
+    return () => {
+        return fetch(window.tracker.api_endpoint + 'profile/login', {
+            method: 'POST',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                ...formData,
+            }),
+        })
+        .then(response => {
+            if (response.ok) {
+                return response.json()
+            }
+            throw response;
+        })
+        .then((response) => {
+            if (!response) {
+                throw response;
+            }
+    
+            localStorage.setItem('userToken', response.userToken);
+            return response;
+        })
+    }
+}
+export const registerUser = (formData) => {
+    return () => {
+        return fetch(window.tracker.api_endpoint + 'profile/register', {
+            method: 'POST',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                ...formData,
+            }),
+        })
+        .then(response => {
+            if (response.ok) {
+                return response.json()
+            }
+            throw response;
+        })
+        .then((response) => {
+            return response;
+        })
+    }
+}
