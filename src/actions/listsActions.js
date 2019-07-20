@@ -1,5 +1,5 @@
 export const addProductToList = (slug, listId) => {
-    return async (dispatch, getState) => {
+    return (dispatch, getState) => {
         return fetch(window.tracker.api_endpoint + 'lists/products', {
             method: 'POST',
             mode: 'cors',
@@ -21,7 +21,7 @@ export const addProductToList = (slug, listId) => {
     }
 }
 export const removeProductFromList = (slug, listId) => {
-    return async (dispatch, getState) => {
+    return (dispatch, getState) => {
         return fetch(window.tracker.api_endpoint + 'lists/products', {
             method: 'DELETE',
             mode: 'cors',

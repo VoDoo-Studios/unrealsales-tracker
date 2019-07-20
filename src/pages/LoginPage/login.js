@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Container, Form, Button, Row, Col, Spinner, Alert } from 'react-bootstrap';
 
-import { setLoginForm, clearLoginForm } from '../../actions/registerActions';
+import { setLoginForm, clearLoginForm, loginUser } from '../../actions/registerActions';
 import { setProcessingForm, setUserToken } from '../../actions/appActions';
 
 import Header from '../../components/Header/header';
@@ -16,61 +16,20 @@ const getUrlParameter = (name) => {
 };
 const mapDispatchToProps = (dispatch) => {
     return {
-        updateForm: (data) => {
-            let input = {
-                [data.target.name]: data.target.type === 'checkbox' ? data.target.checked : data.target.value,
-            };
-            dispatch(setLoginForm(input));
-            dispatch(setLoginForm({invalidLogin: false}));
-            dispatch(setLoginForm({systemFail: false}));
+        setProcessingForm: (form, value) => {
+            return dispatch(setProcessingForm(form, value));
         },
-        handleSubmit: (formData) => event => {
-            const form = event.currentTarget;
-            let isValid = form.checkValidity();
-            event.preventDefault();
-            event.stopPropagation();
-
-            dispatch(setLoginForm({validated: true}));
-            
-            if (isValid) {
-                dispatch(setProcessingForm('loginForm', true));
-                return fetch(window.tracker.api_endpoint + 'profile/login', {
-                    method: 'POST',
-                    mode: 'cors',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        ...formData,
-                    }),
-                })
-                .then(response => {
-                    if (response.ok) {
-                        return response.json()
-                    }
-                    throw response;
-                })
-                .then((response) => {
-                    localStorage.setItem('userToken', response.userToken);
-                    dispatch(setUserToken(response.userToken));
-                    dispatch(setProcessingForm('loginForm', false));
-                    dispatch(clearLoginForm());
-                    if (getUrlParameter('product')) {
-                        window.tracker.appHistory.push('/tracker/add?product=' + getUrlParameter('product'));
-                    } else {
-                        window.tracker.appHistory.push('/tracker/');
-                    }
-                })
-                .catch(err => {
-                    if (err.status === 401) {
-                        dispatch(setLoginForm({invalidLogin: true}));
-                    } else {
-                        dispatch(setLoginForm({systemFail: true}));
-                    }
-                    dispatch(setProcessingForm('loginForm', false));
-                    console.error(err);
-                });
-            }
+        clearLoginForm: () => {
+            return dispatch(clearLoginForm());
+        },
+        setLoginForm: (data) => {
+            return dispatch(setLoginForm(data));
+        },
+        loginUser: (loginForm) => {
+            return dispatch(loginUser(loginForm));
+        },
+        setUserToken: (token) => {
+            return dispatch(setUserToken(token));
         }
     }
 }
@@ -86,14 +45,54 @@ const mapStateToProps = (state) => {
 };
 
 class Login extends React.PureComponent {
+    onChange(data) {
+        const { setLoginForm } = this.props;
+        let input = {
+            [data.target.name]: data.target.type === 'checkbox' ? data.target.checked : data.target.value,
+            invalidLogin: false,
+            systemFail: false,
+        };
+        setLoginForm(input);
+    }
+    async onSubmit(event) {
+        const { setProcessingForm, clearLoginForm, loginForm, setUserToken, setLoginForm, loginUser } = this.props;
+        const form = event.currentTarget;
+        let isValid = form.checkValidity();
+        event.preventDefault();
+        event.stopPropagation();
+        setLoginForm({validated: true});
+        
+        if (isValid) {
+            setProcessingForm('loginForm', true);
+            try {
+                let userProfile = await loginUser(loginForm);
+                setUserToken(userProfile.userToken);
+                setProcessingForm('loginForm', false);
+                clearLoginForm();
+                if (getUrlParameter('product')) {
+                    window.tracker.appHistory.push('/tracker/add?product=' + getUrlParameter('product'));
+                } else {
+                    window.tracker.appHistory.push('/tracker/');
+                }
+            } catch(err) {
+                if (err.status === 401) {
+                    setLoginForm({invalidLogin: true});
+                } else {
+                    setLoginForm({systemFail: true});
+                }
+                setProcessingForm('loginForm', false);
+                console.error(err);
+            }
+        }
+    }
     render() {
-        const { updateForm, loginForm, isProcessing, handleSubmit } = this.props;
+        const { loginForm, isProcessing } = this.props;
         return (
             <Container className="login-page">
                 <Header />
                 <Row className="login-page__content">
                     <Col md={{ span: 6, offset: 3 }}>
-                        <Form noValidate validated={loginForm.validated} onSubmit={handleSubmit(loginForm)}>
+                        <Form noValidate validated={loginForm.validated} onSubmit={this.onSubmit.bind(this)}>
                             {loginForm.invalidLogin &&
                                 <Alert variant="warning">
                                     <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
@@ -115,7 +114,7 @@ class Login extends React.PureComponent {
                                 <Form.Control
                                     required
                                     defaultValue={loginForm.email} 
-                                    onChange={updateForm.bind(this)} 
+                                    onChange={this.onChange.bind(this)} 
                                     name="email"
                                     type="email" 
                                     placeholder="Enter email" />
@@ -126,7 +125,7 @@ class Login extends React.PureComponent {
                                 <Form.Control
                                     required
                                     defaultValue={loginForm.password} 
-                                    onChange={updateForm.bind(this)}
+                                    onChange={this.onChange.bind(this)}
                                     name="password"
                                     type="password" 
                                     placeholder="Password" />
