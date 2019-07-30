@@ -137,7 +137,7 @@ class AddProduct extends React.PureComponent {
     constructAddLink() {
         let href = window.location.href;
         let link = href + (href.substring(href.length-1) === '/' ? '' : '/') + 'add?product=';
-        return 'javascript:(function(){f="' + link + '"+window.location.href;location.href=f;})()'
+        return 'javascript:(function(){if(window.location.href.indexOf("localhost")!==-1)return;f="' + link + '"+window.location.href;location.href=f;})()'
     }
 }
 
