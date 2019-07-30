@@ -35,9 +35,6 @@ class MainPage extends React.PureComponent {
                     <Col lg={4} sm={12}>
                         <Card style={{ width: '18rem' }}>
                             <Card.Body>
-                                <Badge pill variant="success">
-                                    Coming soon
-                                </Badge>
                                 <Card.Title>Track prices</Card.Title>
                                 <Card.Text>
                                     We monitor the prices daily,
