@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
+import IncludeTagsFilter from './includeTagsFilter';
 import stringToColor from '../../modules/strToColor';
 
 import { setFilters } from '../../actions/appActions';
@@ -28,7 +29,7 @@ class Filters extends PureComponent {
     FILTER_BY_CATEGORY = 'BY_CATEGORY';
 
     render() {
-        const { filters, categories } = this.props;
+        const { filters, categories, tags } = this.props;
         return (
             <Navbar bg="dark" expand="lg" variant="dark" className="filters">
                 <Navbar.Toggle aria-controls="filter-selector" />
@@ -43,6 +44,7 @@ class Filters extends PureComponent {
                             className="filters__filterbar-category">
                             <NavDropdown.Header>Filter by category</NavDropdown.Header>
                             <NavDropdown.Item key="clear" eventKey="clear">Clear</NavDropdown.Item>
+                            <NavDropdown.Divider/>
                             {categories.map(cat => {
                                 return (
                                     <NavDropdown.Item key={cat} eventKey={cat} style={{backgroundColor: stringToColor(cat)}}>
@@ -51,6 +53,8 @@ class Filters extends PureComponent {
                                 )
                             })}
                         </NavDropdown>
+                        <h5>Tags</h5>
+                        <IncludeTagsFilter/>
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
