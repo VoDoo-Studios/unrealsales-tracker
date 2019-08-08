@@ -17,7 +17,7 @@ const mapStateToProps = (state) => {
     const tags = [...new Set(Object.keys(state.products).flatMap((product) => {
         return state.products[product].tags.map((tag) => tag.name);
     }))];
-    const formattedTags = tags.map((tag) => { return {label: '+' + tag, value: tag}});
+    const formattedTags = tags.map((tag) => { return {label: '+' + tag.toLowerCase(), value: tag}});
 
     return {
         tags,
@@ -37,6 +37,12 @@ class IncludeTagsFilter extends PureComponent {
                     options={formattedTags}
                     selected={filters['tags.name'] || tags}
                     onSelectedChanged={this.handleSaveFilter.bind(this)}
+                    overrideStrings={{
+                        selectSomeItems: "Include some tags...",
+                        allItemsAreSelected: "All tags are included",
+                        selectAll: "Select All",
+                        search: "Search",
+                    }}
                 />
             </div>
         );

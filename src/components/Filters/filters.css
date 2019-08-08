@@ -25,8 +25,30 @@
 }
 /* TAGS FILTER STYLE */
 .filters__filterbar-includetags {
-    width:15rem;
+    width:auto;
+    max-width: 310px;
 }
 .filters__filterbar-includetags .item-renderer span {
     text-transform: capitalize;
+}
+.filters__filterbar-includetags > .multi-select > .dropdown > .dropdown-heading {
+    background-color: transparent!important;
+    border-width: 0!important;
+    color:rgba(255,255,255,.5)!important;
+    display: block!important;
+}
+.filters__filterbar-includetags .dropdown-heading-value {
+    color:rgba(255,255,255,.5)!important;
+    line-height: 2.5rem!important;
+    left:auto!important;
+    right:auto!important;
+    position:relative!important;
+    font-weight: 700;
+    text-transform: capitalize;
+}
+.filters__filterbar-includetags .dropdown-heading-loading-container {
+    display:inline!important;
+}
+.filters__filterbar-includetags .dropdown-heading-dropdown-arrow {
+    display:inline!important;
 }
