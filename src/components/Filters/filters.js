@@ -53,8 +53,6 @@ class Filters extends PureComponent {
                                 )
                             })}
                         </NavDropdown>
-                        <h5>Tags</h5>
-                        <IncludeTagsFilter/>
                         <IncludeTagsFilter/>
                     </Nav>
                 </Navbar.Collapse>

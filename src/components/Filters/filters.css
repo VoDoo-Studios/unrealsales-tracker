@@ -51,4 +51,5 @@
 }
 .filters__filterbar-includetags .dropdown-heading-dropdown-arrow {
     display:inline!important;
+    top: -3px;
 }
