@@ -1,8 +1,9 @@
 .grid {
     padding: 1rem;
     border-width: .2rem .2rem 0;
-    border: 0.12rem solid #ececec;
-    border-radius: 8px 8px 0 0;
+    border-left: 0.12rem solid #ececec;
+    border-right: 0.12rem solid #ececec;
+    border-bottom: 0.12rem solid #ececec;
 }
 .grid-loader {
     margin-top: 200px;

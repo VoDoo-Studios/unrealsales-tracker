@@ -1,0 +1,28 @@
+.filters {
+    border-radius: 8px 8px 0 0;
+}
+.filters__filterbar {
+    width:100%;
+}
+.filters__filterbar h5 {
+    color:#fff;
+    margin-bottom: 0;
+    line-height: 2.4rem;
+}
+.filters__dateicon {
+    color: #cacaca;
+    font-size: 1.5rem;
+    padding: .5rem;
+    box-sizing: content-box;
+}
+.filters__filterbar .nav-item .nav-link{
+    color: #cacaca;
+    font-weight: 700;
+}
+.filters__filterbar .nav-item .nav-link:hover {
+    color: #0a9ffd;
+    text-decoration: underline;
+}
+.filters__filterbar .nav-item .nav-link.active {
+    color: #0a9ffd;
+}

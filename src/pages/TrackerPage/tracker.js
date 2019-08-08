@@ -5,6 +5,7 @@ import { Container } from 'react-bootstrap';
 import Header from '../../components/Header/header';
 import Grid from '../../components/Grid/grid';
 import AddProduct from '../../components/AddProduct/addproduct';
+import Filters from '../../components/Filters/filters';
 
 import './tracker.css';
 
@@ -34,6 +35,7 @@ class Tracker extends React.PureComponent {
             <Container  className="list-page">
                 <Header/>
                 <AddProduct/>
+                <Filters/>
                 <Grid/>
             </Container>
         )
