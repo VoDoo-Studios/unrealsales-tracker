@@ -53,3 +53,8 @@
     display:inline!important;
     top: -3px;
 }
+.filters__filterbar-includetags .dropdown-heading-value span:hover {
+    text-decoration: underline;
+    cursor: pointer;
+    color:rgba(255,255,255,.75);
+}
