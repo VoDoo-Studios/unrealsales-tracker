@@ -2,7 +2,7 @@ export const setProcessingForm = (formName, isProcessing) => {
     return {
         type: 'SET_PROCESSING_FORM',
         formName,
-        isProcessing
+        isProcessing,
     };
 };
 export const setUserToken = (token) => {
@@ -11,3 +11,9 @@ export const setUserToken = (token) => {
         token,
     };
 };
+export const setFilters = (filters) => {
+    return {
+        type: 'SET_FILTERS',
+        filters,
+    }
+}

@@ -1,19 +1,34 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
+import stringToColor from '../../modules/strToColor';
+
+import { setFilters } from '../../actions/appActions';
 
 import './filters.css';
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        setFilters: (filters) => {
+            dispatch(setFilters(filters));
+        }
     };
 };
 const mapStateToProps = (state) => {
-    return {}
+    const categories = [...new Set(Object.keys(state.products).map((product) => {
+        return state.products[product].categories[0].name;
+    }))];
+    return {
+        categories,
+        filters: state.app.filters,
+    }
 };
 
-class Filters extends Component {
+class Filters extends PureComponent {
+    FILTER_BY_CATEGORY = 'BY_CATEGORY';
+
     render() {
+        const { filters, categories } = this.props;
         return (
             <Navbar bg="dark" expand="lg" variant="dark" className="filters">
                 <Navbar.Toggle aria-controls="filter-selector" />
@@ -22,12 +37,19 @@ class Filters extends Component {
                         className="filters__filterbar"
                     >
                         <h5>Filters</h5>
-                        <NavDropdown title="by category" id="nav-dropdown">
-                            <NavDropdown.Item eventKey="4.1">Action</NavDropdown.Item>
-                            <NavDropdown.Item eventKey="4.2">Another action</NavDropdown.Item>
-                            <NavDropdown.Item eventKey="4.3">Something else here</NavDropdown.Item>
-                            <NavDropdown.Divider />
-                            <NavDropdown.Item eventKey="4.4">Separated link</NavDropdown.Item>
+                        <NavDropdown 
+                            title={filters && filters.hasOwnProperty('categories.name') ? filters['categories.name'] : 'by category'} 
+                            onSelect={this.handleSaveFilter.bind(this, this.FILTER_BY_CATEGORY)}
+                            className="filters__filterbar-category">
+                            <NavDropdown.Header>Filter by category</NavDropdown.Header>
+                            <NavDropdown.Item key="clear" eventKey="clear">Clear</NavDropdown.Item>
+                            {categories.map(cat => {
+                                return (
+                                    <NavDropdown.Item key={cat} eventKey={cat} style={{backgroundColor: stringToColor(cat)}}>
+                                        {cat}
+                                    </NavDropdown.Item>
+                                )
+                            })}
                         </NavDropdown>
                     </Nav>
                 </Navbar.Collapse>
@@ -35,40 +57,20 @@ class Filters extends Component {
         );
     }
 
-    handleSaveFilter(filter) {
-        const { setDateFilterStart, setDateFilterEnd, setActiveDateFilterName } = this.props;
-        let today = new Date();
-        let past = null;
-        let currentDate = today.getFullYear() + '-' + ("0" + (today.getMonth() + 1)).slice(-2) + '-' + ("0" + today.getDate()).slice(-2);
-        setActiveDateFilterName(filter);
+    handleSaveFilter(filter, selection) {
+        const { setFilters, filters } = this.props;
         switch (filter) {
-            case '7D':
-                past = new Date();
-                past.setDate(today.getDate() - 7);
+            case this.FILTER_BY_CATEGORY:
+                let newFilters = {
+                    ...filters,
+                    'categories.name': selection,
+                }
+                if (selection === 'clear') delete newFilters['categories.name'];
+                setFilters(newFilters);
                 break;
-            case '14D':
-                past = new Date();
-                past.setDate(today.getDate() - 14);
-                break;
-            case '1M':
-                past = new Date();
-                past.setMonth(today.getMonth() - 1);
-                break;
-            case '3M':
-                past = new Date();
-                past.setMonth(today.getMonth() - 3);
-                break;
-            case 'ALL':
-                setDateFilterStart('');
-                setDateFilterEnd('');
-                break;
+
             default:
-                break
-        }
-        if (past) {
-            let pastDate = past.getFullYear() + '-' + ("0" + (past.getMonth() + 1)).slice(-2) + '-' + ("0" + past.getDate()).slice(-2);
-            setDateFilterStart(pastDate);
-            setDateFilterEnd(currentDate);
+                break;
         }
     }
 }

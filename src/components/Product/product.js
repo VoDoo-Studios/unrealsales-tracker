@@ -1,9 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Card, Badge } from 'react-bootstrap';
+import { matchObject } from 'searchjs';
 import { FaExternalLinkAlt } from 'react-icons/fa';
 import ReadMoreReact from 'read-more-react';
 import RemoveProduct from './removeproduct';
+import stringToColor from '../../modules/strToColor';
 
 import { setProcessingForm } from '../../actions/appActions';
 import { postProduct, setProduct } from '../../actions/productsActions';
@@ -21,10 +23,12 @@ const mapStateToProps = (state, ownProps) => {
     const isProcessing = (state.app.processing && state.app.processing.retrieveLists) || false;
     const slug = ownProps.slug;
     const product = state.products[slug] || false;
+    const filters = state.app.filters || false;
     return {
         isProcessing,
         slug,
         product,
+        filters,
     }
 };
 
@@ -44,12 +48,15 @@ class Product extends React.PureComponent {
     }
   
     render() {
-        const { product, slug } = this.props
+        const { product, slug, filters } = this.props
         if (!product) {
             return (
                 <Card style={{ maxWidth: '17rem', minHeight: '30rem' }}>
                 </Card>
             )
+        }
+        if (filters && !matchObject(product, filters)) {
+            return null;
         }
         return (
             <Card style={{ maxWidth: '17rem' }} className="product">
@@ -71,7 +78,7 @@ class Product extends React.PureComponent {
                 <Card.Body>
                     <Badge variant="secondary"> {product.price} </Badge>
                     <Badge variant="info" className="product__category" style={{ 
-                            backgroundColor: this.stringToColour(product.categories[0].name)
+                            backgroundColor: stringToColor(product.categories[0].name)
                         }}>
                         {product.categories[0].name}
                     </Badge>
@@ -84,18 +91,6 @@ class Product extends React.PureComponent {
             </Card>
         )
     }
-    stringToColour(str) {
-        let hash = 0;
-        for (let i = 0; i < str.length; i++) {
-          hash = str.charCodeAt(i) + ((hash << 5) - hash);
-        }
-        let colour = '#';
-        for (let i = 0; i < 3; i++) {
-          let value = (hash >> (i * 8)) & 0xFF;
-          colour += ('00' + value.toString(16)).substr(-2);
-        }
-        return colour;
-      }
 }
 
 export default Product = connect(mapStateToProps, mapDispatchToProps)(Product);

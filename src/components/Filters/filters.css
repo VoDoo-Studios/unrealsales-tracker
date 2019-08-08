@@ -9,11 +9,8 @@
     margin-bottom: 0;
     line-height: 2.4rem;
 }
-.filters__dateicon {
-    color: #cacaca;
-    font-size: 1.5rem;
-    padding: .5rem;
-    box-sizing: content-box;
+.filters__filterbar-category .dropdown-menu > .dropdown-item:not(:nth-child(-n+2)) {
+    color:#fff;
 }
 .filters__filterbar .nav-item .nav-link{
     color: #cacaca;

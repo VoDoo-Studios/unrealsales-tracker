@@ -13,6 +13,11 @@ const app = (state = {}, data) => {
                 ...state,
                 userToken: data.token
             }
+        case 'SET_FILTERS':
+            return {
+                ...state,
+                filters: data.filters,
+            }
         default:
             return state;
     }
