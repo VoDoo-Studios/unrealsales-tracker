@@ -27,6 +27,7 @@
 .filters__filterbar-includetags {
     width:auto;
     max-width: 310px;
+    min-width: 190px;
 }
 .filters__filterbar-includetags .item-renderer span {
     text-transform: capitalize;
