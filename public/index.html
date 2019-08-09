@@ -16,10 +16,12 @@
     />
     <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
     <script>
-      window.TrackJS && TrackJS.install({ 
-        token: "8e3126d1b2a149c0a3fefbadad990d4d",
-        application: "unrealsalestracker"
-      });
+      if (window.location.href.indexOf('localhost') === -1) {
+        window.TrackJS && TrackJS.install({ 
+          token: "8e3126d1b2a149c0a3fefbadad990d4d",
+          application: "unrealsalestracker"
+        });
+      }
     </script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-12208675-15"></script>

@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
+import { matchObject } from 'searchjs';
 import MultiSelect from "@khanacademy/react-multi-select";
 
 import { setFilters } from '../../actions/appActions';
@@ -13,15 +14,28 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 const mapStateToProps = (state) => {
-    const tags = [...new Set(Object.keys(state.products).flatMap((product) => {
-        return state.products[product].tags.map((tag) => tag.name);
+    const filters = state.app.filters || [];
+    let filteredFilters = Object.keys(filters).filter((filter) => filter !== 'tags.name')
+        .reduce( (res, key) => (res[key] = filters[key], res), {} );
+    const filteredProducts = Object.keys(state.products).filter((product) => {
+        if (filters && !matchObject(state.products[product], filteredFilters)) {
+            return false;
+        }
+        return true;
+    }).reduce( (res, key) => (res[key] = state.products[key], res), {} );
+
+    const tags = [...new Set(Object.keys(filteredProducts).flatMap((product) => {
+        return filteredProducts[product].hasOwnProperty('tags') ? filteredProducts[product].tags.map((tag) => {         
+            return tag.name;
+        }) : [];
     }))];
-    const formattedTags = tags.map((tag) => { return {label: tag.toLowerCase(), value: tag}});
+    console.log(tags)
+    const formattedTags = (tags && tags.map((tag) => { return {label: tag.toLowerCase(), value: tag}})) || [];
 
     return {
         tags,
         formattedTags,
-        filters: state.app.filters || false,
+        filters, 
     }
 };
 
