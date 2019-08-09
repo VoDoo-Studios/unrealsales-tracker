@@ -29,7 +29,6 @@ const mapStateToProps = (state) => {
             return tag.name;
         }) : [];
     }))];
-    console.log(tags)
     const formattedTags = (tags && tags.map((tag) => { return {label: tag.toLowerCase(), value: tag}})) || [];
 
     return {
