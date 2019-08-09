@@ -7,6 +7,7 @@ import { Router, Route, Switch } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import thunk from 'redux-thunk';
 import * as serviceWorker from './serviceWorker';
+import TrackJSLogger from './modules/trackJs';
 
 import unrealTracker from './reducers/';
 
@@ -27,7 +28,7 @@ window.tracker = {};
 let store = createStore(
 	unrealTracker,
     persistedLogin,
-	composeEnhancers(applyMiddleware(thunk)),
+	composeEnhancers(applyMiddleware(thunk), applyMiddleware(TrackJSLogger)),
 );
 // Link history API
 const history = createBrowserHistory();
