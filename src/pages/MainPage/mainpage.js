@@ -46,6 +46,18 @@ class MainPage extends React.PureComponent {
                     <Col lg={4} sm={12}>
                         <Card style={{ width: '18rem' }}>
                             <Card.Body>
+                                <Card.Title>Filters</Card.Title>
+                                <Card.Text>
+                                    Filter your list based on category or tags.
+                                </Card.Text>
+                            </Card.Body>
+                        </Card>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col lg={4} sm={12}>
+                        <Card style={{ width: '18rem' }}>
+                            <Card.Body>
                                 <Badge pill variant="success">
                                     Coming soon
                                 </Badge>
@@ -57,8 +69,6 @@ class MainPage extends React.PureComponent {
                             </Card.Body>
                         </Card>
                     </Col>
-                </Row>
-                <Row>
                     <Col lg={4} sm={12}>
                         <Card style={{ width: '18rem' }}>
                             <Card.Body>
@@ -72,19 +82,7 @@ class MainPage extends React.PureComponent {
                             </Card.Body>
                         </Card>
                     </Col>
-                    <Col lg={4} sm={12}>
-                        <Card style={{ width: '18rem' }}>
-                            <Card.Body>
-                                <Badge pill variant="success">
-                                    Coming soon
-                                </Badge>
-                                <Card.Title>Filters</Card.Title>
-                                <Card.Text>
-                                    Filter your list based on category or tags.
-                                </Card.Text>
-                            </Card.Body>
-                        </Card>
-                    </Col>
+                    
                 </Row>
                 <Row className="main-page__cta">
                     <h2>
