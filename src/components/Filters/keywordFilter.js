@@ -22,17 +22,23 @@ const mapStateToProps = (state) => {
 
 class KeywordFilter extends PureComponent {
     render() {
+        const { filters } = this.props;
+
         return (
             <div className="keywordfilter">
                 <InputGroup className="pl-3 pr-3 keywordfilter__searchinput">
                     <FormControl
+                        defaultValue={filters.keywordFilter && filters.keywordFilter.terms[0].terms[0].description || ''}
+                        value={filters.keywordFilter && filters.keywordFilter.terms[0].terms[0].description || ''}
                         placeholder="by keyword"
                         aria-label="by keyword"
                         aria-describedby="basic-addon2"
                         onChange={this.handleSaveFilter.bind(this)}
                     />
                     <InputGroup.Append>
-                        <Button className="keywordfilter__clearbtn" variant="outline-secondary"><FaBackspace size={21} /></Button>
+                        <Button className="keywordfilter__clearbtn" variant="outline-secondary" onClick={this.handleClearFilter.bind(this)}>
+                            <FaBackspace size={21} />
+                        </Button>
                     </InputGroup.Append>
                 </InputGroup>
             </div>
@@ -58,6 +64,16 @@ class KeywordFilter extends PureComponent {
         }
         setFilters(newFilters);
 
+    }
+
+    handleClearFilter() {
+        const { setFilters, filters } = this.props;
+
+        let newFilters = {
+            ...filters
+        };
+        delete newFilters.keywordFilter;
+        setFilters(newFilters);
     }
 }
 
