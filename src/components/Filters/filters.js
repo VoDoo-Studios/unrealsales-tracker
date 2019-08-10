@@ -21,7 +21,7 @@ class Filters extends PureComponent {
                         <KeywordFilter/>
                         <CategoryFilter/>
                         <IncludeTagsFilter/>
-                        <AdvancedFilter/>
+                        {/* <AdvancedFilter/> */}
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
