@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { NavDropdown } from 'react-bootstrap';
+import { matchObject } from 'searchjs';
 import stringToColor from '../../modules/strToColor';
 
 import { setFilters } from '../../actions/appActions';
@@ -15,12 +16,21 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 const mapStateToProps = (state) => {
-    const categories = [...new Set(Object.keys(state.products).map((product) => {
-        return state.products[product].categories[0].name;
+    const filters = state.app.filters || [];
+    let filteredFilters = Object.keys(filters).filter((filter) => filter !== 'categories.name')
+        .reduce( (res, key) => (res[key] = filters[key], res), {} );
+    const filteredProducts = Object.keys(state.products).filter((product) => {
+        if (filters && !matchObject(state.products[product], filteredFilters)) {
+            return false;
+        }
+        return true;
+    }).reduce( (res, key) => (res[key] = state.products[key], res), {} );
+    const categories = [...new Set(Object.keys(filteredProducts).map((product) => {
+        return filteredProducts[product].categories[0].name;
     }))];
     return {
         categories,
-        filters: state.app.filters,
+        filters,
     }
 };
 
