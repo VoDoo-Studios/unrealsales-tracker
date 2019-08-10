@@ -72,3 +72,17 @@
 .keywordfilter__searchinput input {
     border-right:0;
 }
+
+/* Advanced filter */
+@media (min-width: 992px) {
+    .filters__filterbar-advancedfilter .dropdown-menu {
+        width: calc(100vw - (100vw - 925px));
+        right: -220px;
+    }
+}
+@media (min-width: 1200px) {
+    .filters__filterbar-advancedfilter .dropdown-menu {
+        width: calc(100vw - (100vw - 1113px));
+        right: -405px;
+    }
+}
