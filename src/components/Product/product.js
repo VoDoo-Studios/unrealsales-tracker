@@ -23,7 +23,7 @@ const mapStateToProps = (state, ownProps) => {
     const isProcessing = (state.app.processing && state.app.processing.retrieveLists) || false;
     const slug = ownProps.slug;
     const product = state.products[slug] || false;
-    const filters = state.app.filters || false;
+    const filters = state.app.filters || {};
     return {
         isProcessing,
         slug,
@@ -48,15 +48,23 @@ class Product extends React.PureComponent {
     }
   
     render() {
-        const { product, slug, filters } = this.props
+        const { product, slug, filters } = this.props;
+
         if (!product) {
             return (
                 <Card style={{ maxWidth: '17rem', minHeight: '30rem' }}>
                 </Card>
             )
         }
-        if (filters && !matchObject(product, filters)) {
-            return null;
+
+        if (filters) {
+            let filtered = false;
+            Object.keys(filters).map((filter) => {
+                if (!matchObject(product, filters[filter])) filtered = true;
+            })
+            if (filtered) {
+                return null;
+            }
         }
         return (
             <Card style={{ maxWidth: '17rem' }} className="product">

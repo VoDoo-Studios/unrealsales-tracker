@@ -14,21 +14,29 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 const mapStateToProps = (state) => {
-    const filters = state.app.filters || [];
-    let filteredFilters = Object.keys(filters).filter((filter) => filter !== 'tags.name')
+    const filters = state.app.filters || {};
+
+    // Retrieve all filters except the current one
+    let filteredFilters = Object.keys(filters).filter((filter) => filter !== 'tagFilter')
         .reduce( (res, key) => (res[key] = filters[key], res), {} );
+
+    // Filter out products that had been already filtered by other filters
     const filteredProducts = Object.keys(state.products).filter((product) => {
-        if (filters && !matchObject(state.products[product], filteredFilters)) {
-            return false;
-        }
-        return true;
+        let filtered = false;
+        Object.keys(filteredFilters).map((filter) => {
+            if (!matchObject(state.products[product], filteredFilters[filter])) filtered = true;
+        })
+        return !filtered;
     }).reduce( (res, key) => (res[key] = state.products[key], res), {} );
 
+    // Retrieve tags from already filtered products
     const tags = [...new Set(Object.keys(filteredProducts).flatMap((product) => {
         return filteredProducts[product].hasOwnProperty('tags') ? filteredProducts[product].tags.map((tag) => {         
             return tag.name;
         }) : [];
     }))];
+
+    // Transform tags to pass down to Multiselect as options
     const formattedTags = (tags && tags.map((tag) => { return {label: tag.toLowerCase(), value: tag}})) || [];
 
     return {
@@ -47,7 +55,7 @@ class IncludeTagsFilter extends PureComponent {
             <div className="filters__filterbar-includetags">
                 <MultiSelect
                     options={formattedTags}
-                    selected={filters['tags.name'] || tags}
+                    selected={filters && filters.tagFilter && filters.tagFilter['tags.name'] || tags}
                     onSelectedChanged={this.handleSaveFilter.bind(this)}
                     overrideStrings={{
                         selectSomeItems: "All tags are excluded",
@@ -64,7 +72,9 @@ class IncludeTagsFilter extends PureComponent {
         const { setFilters, filters } = this.props;
         let newFilters = {
             ...filters,
-            'tags.name': filter,
+            tagFilter: {
+                'tags.name': filter,
+            }
         }
         setFilters(newFilters);
     }
