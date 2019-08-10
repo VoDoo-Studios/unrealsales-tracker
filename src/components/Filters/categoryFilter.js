@@ -6,8 +6,6 @@ import stringToColor from '../../modules/strToColor';
 
 import { setFilters } from '../../actions/appActions';
 
-import './filters.css';
-
 const mapDispatchToProps = (dispatch) => {
     return {
         setFilters: (filters) => {
