@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Navbar, Nav } from 'react-bootstrap';
 import IncludeTagsFilter from './includeTagsFilter';
 import CategoryFilter from './categoryFilter';
+import KeywordFilter from './keywordFilter';
 
 import './filters.css';
 
@@ -16,6 +17,7 @@ class Filters extends PureComponent {
                         className="filters__filterbar"
                     >
                         <h5>Filters</h5>
+                        <KeywordFilter/>
                         <CategoryFilter/>
                         <IncludeTagsFilter/>
                     </Nav>

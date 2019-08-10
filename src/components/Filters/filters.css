@@ -59,3 +59,16 @@
     cursor: pointer;
     color:rgba(255,255,255,.75);
 }
+/* Keyword filter */
+.keywordfilter__clearbtn, .keywordfilter__clearbtn:hover {
+    background-color: #fff;
+    border-top: 1px solid #ced4da;
+    border-right: 1px solid #ced4da;
+    border-bottom: 1px solid #ced4da;
+    border-left:0;
+    padding: 0.3rem;
+    color:#6c757d;
+}
+.keywordfilter__searchinput input {
+    border-right:0;
+}
