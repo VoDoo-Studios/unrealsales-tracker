@@ -58,9 +58,9 @@ class IncludeTagsFilter extends PureComponent {
                     selected={filters && filters.tagFilter && filters.tagFilter['tags.name'] || tags}
                     onSelectedChanged={this.handleSaveFilter.bind(this)}
                     overrideStrings={{
-                        selectSomeItems: "All tags are excluded",
-                        allItemsAreSelected: "All tags are included",
-                        selectAll: "Include All",
+                        selectSomeItems: "all tags are excluded",
+                        allItemsAreSelected: "all tags are included",
+                        selectAll: "Include all",
                         search: "Search",
                     }}
                 />

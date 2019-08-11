@@ -45,7 +45,6 @@
     right:auto!important;
     position:relative!important;
     font-weight: 700;
-    text-transform: capitalize;
 }
 .filters__filterbar-includetags .dropdown-heading-loading-container {
     display:inline!important;
