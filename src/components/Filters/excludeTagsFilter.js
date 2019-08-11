@@ -39,23 +39,28 @@ const mapStateToProps = (state) => {
     // Transform tags to pass down to Multiselect as options
     const formattedTags = (tags && tags.map((tag) => { return {label: '-' + tag.toLowerCase(), value: tag}})) || [];
 
+    let selectedTagFilters = filters && filters.excludeTagFilter && filters.excludeTagFilter['tags.name'] || [];
+    selectedTagFilters = selectedTagFilters.filter((tag) => {
+        return tags.includes(tag);
+    })
+
     return {
-        tags,
         formattedTags,
-        filters, 
+        filters,
+        selectedTagFilters
     }
 };
 
 class ExcludeTagsFilter extends PureComponent {
 
     render() {
-        const { filters, tags, formattedTags } = this.props;
+        const { selectedTagFilters, formattedTags } = this.props;
 
         return (
             <div className="filters__filterbar-includetags">
                 <MultiSelect
                     options={formattedTags}
-                    selected={filters && filters.excludeTagFilter && filters.excludeTagFilter['tags.name'] || []}
+                    selected={selectedTagFilters}
                     onSelectedChanged={this.handleSaveFilter.bind(this)}
                     overrideStrings={{
                         selectSomeItems: "no tags excluded",
