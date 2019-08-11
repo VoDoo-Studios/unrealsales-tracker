@@ -17,7 +17,7 @@ const mapStateToProps = (state) => {
     const filters = state.app.filters || {};
 
     // Retrieve all filters except the current one
-    let filteredFilters = Object.keys(filters).filter((filter) => filter !== 'tagFilter')
+    let filteredFilters = Object.keys(filters).filter((filter) => filter !== 'excludeTagFilter')
         .reduce( (res, key) => (res[key] = filters[key], res), {} );
 
     // Filter out products that had been already filtered by other filters
@@ -37,7 +37,7 @@ const mapStateToProps = (state) => {
     }))];
 
     // Transform tags to pass down to Multiselect as options
-    const formattedTags = (tags && tags.map((tag) => { return {label: '+' + tag.toLowerCase(), value: tag}})) || [];
+    const formattedTags = (tags && tags.map((tag) => { return {label: '-' + tag.toLowerCase(), value: tag}})) || [];
 
     return {
         tags,
@@ -46,7 +46,7 @@ const mapStateToProps = (state) => {
     }
 };
 
-class IncludeTagsFilter extends PureComponent {
+class ExcludeTagsFilter extends PureComponent {
 
     render() {
         const { filters, tags, formattedTags } = this.props;
@@ -55,12 +55,12 @@ class IncludeTagsFilter extends PureComponent {
             <div className="filters__filterbar-includetags">
                 <MultiSelect
                     options={formattedTags}
-                    selected={filters && filters.tagFilter && filters.tagFilter['tags.name'] || tags}
+                    selected={filters && filters.excludeTagFilter && filters.excludeTagFilter['tags.name'] || []}
                     onSelectedChanged={this.handleSaveFilter.bind(this)}
                     overrideStrings={{
-                        selectSomeItems: "all tags are excluded",
-                        allItemsAreSelected: "all tags are included",
-                        selectAll: "Include all",
+                        selectSomeItems: "no tags excluded",
+                        allItemsAreSelected: "all tags are excluded",
+                        selectAll: "Exclude all",
                         search: "Search",
                     }}
                 />
@@ -72,7 +72,8 @@ class IncludeTagsFilter extends PureComponent {
         const { setFilters, filters } = this.props;
         let newFilters = {
             ...filters,
-            tagFilter: {
+            excludeTagFilter: {
+                '_not': true,
                 'tags.name': filter,
             }
         }
@@ -80,4 +81,4 @@ class IncludeTagsFilter extends PureComponent {
     }
 }
 
-export default IncludeTagsFilter = connect(mapStateToProps, mapDispatchToProps)(IncludeTagsFilter);
+export default ExcludeTagsFilter = connect(mapStateToProps, mapDispatchToProps)(ExcludeTagsFilter);

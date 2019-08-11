@@ -4,6 +4,7 @@ import { Navbar, Nav } from 'react-bootstrap';
 import IncludeTagsFilter from './includeTagsFilter';
 import CategoryFilter from './categoryFilter';
 import KeywordFilter from './keywordFilter';
+import ExcludeTagsFilter from './excludeTagsFilter';
 import AdvancedFilter from './advancedFilter';
 
 import './filters.css';
@@ -21,6 +22,7 @@ class Filters extends PureComponent {
                         <KeywordFilter/>
                         <CategoryFilter/>
                         <IncludeTagsFilter/>
+                        <ExcludeTagsFilter/>
                         {/* <AdvancedFilter/> */}
                     </Nav>
                 </Navbar.Collapse>
