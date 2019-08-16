@@ -91,12 +91,17 @@ class Product extends React.PureComponent {
                 </div>
 
                 <Card.Body>
-                    <Badge variant="secondary"> {product.price} </Badge>
-                    <Badge variant="info" className="product__category" style={{ 
-                            backgroundColor: stringToColor(product.categories[0].name)
-                        }}>
-                        {product.categories[0].name}
-                    </Badge>
+                    <div className="product__badges">
+                        <Badge variant="secondary"> {product.price} </Badge>
+                        {product.discounted &&
+                            <Badge variant="danger"> {product.discountPrice} </Badge>
+                        }
+                        <Badge variant="info" className="product__category" style={{ 
+                                backgroundColor: stringToColor(product.categories[0].name)
+                            }}>
+                            {product.categories[0].name}
+                        </Badge>
+                    </div>
                     <Card.Title>{product.title}</Card.Title>
                     <Card.Text as="div">
                         <ReadMoreReact text={product.description}

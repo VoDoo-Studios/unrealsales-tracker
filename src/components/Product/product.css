@@ -1,4 +1,4 @@
-.product__category {
+.product__badges .badge:not(:first-child) {
     margin-left:0.5rem;
 }
 .read-more-button {
@@ -51,10 +51,5 @@ a.product__remove {
 @media (min-width: 1100px){
     .card-columns {
         column-count: 4;
-    }
-}
-@media (min-width: 1300px){
-    .card-columns {
-        column-count: 5;
     }
 }
