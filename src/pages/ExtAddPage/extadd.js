@@ -123,7 +123,7 @@ class ExtAdd extends React.PureComponent {
         let results = regex.exec(window.location.search);
         response.url = results && results.length > 0 ? decodeURIComponent(results[1].replace(/\+/g, ' ')) : '';
     
-        let slugRegex = /^https:\/\/(www\.|)unrealengine\.com\/marketplace\/(.*)\/slug\/([a-z0-9-]+)(\/|)$/i;
+        let slugRegex = /^https:\/\/(www\.|)unrealengine\.com\/marketplace\/(.*)\/slug\/([a-z0-9-]+)(\/|)/i;
         let slugMatches = response.url.match(slugRegex);
         if (slugMatches) response.slug = slugMatches[3];
 

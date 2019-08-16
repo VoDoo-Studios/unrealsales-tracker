@@ -52,7 +52,7 @@ class AddProduct extends React.PureComponent {
     }
     async onSave() {
         const { addProduct, setProduct, addProductToList, getLists, listId, setProcessingForm } = this.props;
-        let regex = /^https:\/\/(www\.|)unrealengine\.com\/marketplace\/(.*)\/slug\/([a-z0-9-]+)(\/|)$/i;
+        let regex = /^https:\/\/(www\.|)unrealengine\.com\/marketplace\/(.*)\/slug\/([a-z0-9-]+)(\/|)/i;
         let slugMatches = this.state.newSlug.match(regex);
         if (!slugMatches) {
             return this.setState({
