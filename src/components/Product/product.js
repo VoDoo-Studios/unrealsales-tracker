@@ -81,6 +81,13 @@ class Product extends React.PureComponent {
                         </a>
                         <RemoveProduct slug={slug}/>
                     </div>
+                    <div className="product__image-badgeoverlay">
+                        {product.discounted &&
+                            <Badge variant="success" className="product__image-onsalebadge">
+                                On Sale
+                            </Badge>
+                        }
+                    </div>
                 </div>
 
                 <Card.Body>
