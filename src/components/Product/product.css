@@ -1,6 +1,12 @@
 .product__badges .badge:not(:first-child) {
     margin-left:0.5rem;
 }
+.product__image-onsalebadge {
+    border-radius: 0 9px 9px 0;
+    height: 30px;
+    line-height: 2;
+    margin-top: 10px;
+}
 .read-more-button {
     color: #4a9ee8;
     cursor: pointer;

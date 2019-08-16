@@ -84,7 +84,7 @@ class Product extends React.PureComponent {
                     <div className="product__image-badgeoverlay">
                         {product.discounted &&
                             <Badge variant="success" className="product__image-onsalebadge">
-                                On Sale {100 - product.discountPercentage}% off 
+                                On Sale! {100 - product.discountPercentage}% off 
                             </Badge>
                         }
                     </div>
