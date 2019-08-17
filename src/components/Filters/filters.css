@@ -1,5 +1,6 @@
 .filters {
     border-radius: 8px 8px 0 0;
+    z-index: 999;
 }
 .filters__filterbar {
     width:100%;
