@@ -36,6 +36,9 @@
 }
 .product.card .product__image-overlay a {
     color:#cacaca;
+    width:2rem;
+    height:2rem;
+    display:inline-block;
 }
 .product.card:hover .product__image-overlay {
     display: block;
