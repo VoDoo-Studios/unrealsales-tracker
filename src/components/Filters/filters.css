@@ -10,6 +10,9 @@
     margin-bottom: 0;
     line-height: 2.4rem;
 }
+.filters__filterbar-category {
+    padding-left:10px;
+}
 .filters__filterbar-category .dropdown-menu > .dropdown-item:not(:nth-child(-n+2)) {
     color:#fff;
 }

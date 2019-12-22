@@ -52,7 +52,7 @@ class AddProduct extends React.PureComponent {
     }
     async onSave() {
         const { addProduct, setProduct, addProductToList, getLists, listId, setProcessingForm } = this.props;
-        let regex = /^https:\/\/(www\.|)unrealengine\.com\/marketplace\/(.*)\/slug\/([a-z0-9-]+)(\/|)/i;
+        let regex = /^https:\/\/(www\.|)unrealengine\.com\/marketplace\/(.*)\/(slug|product)\/([a-z0-9-]+)(\/|)/i;
         let slugMatches = this.state.newSlug.match(regex);
         if (!slugMatches) {
             return this.setState({
@@ -108,8 +108,8 @@ class AddProduct extends React.PureComponent {
                                     <FormControl
                                         onChange={this.onUpdateNewSlug.bind(this)}
                                         value={this.state.newSlug}
-                                        placeholder="https://www.unrealengine.com/marketplace/en-US/slug/modular-temple-plaza-4k-pbr"
-                                        aria-label="https://www.unrealengine.com/marketplace/en-US/slug/modular-temple-plaza-4k-pbr"
+                                        placeholder="https://www.unrealengine.com/marketplace/en-US/product/modular-temple-plaza-4k-pbr"
+                                        aria-label="https://www.unrealengine.com/marketplace/en-US/product/modular-temple-plaza-4k-pbr"
                                         aria-describedby="basic-addon2"
                                         isInvalid={this.state.invalidLink}
                                     />
@@ -125,7 +125,7 @@ class AddProduct extends React.PureComponent {
                                         </Button>
                                     </InputGroup.Append>
                                     <FormControl.Feedback type="invalid">
-                                        Link to product is invalid, here how a valid link looks https://www.unrealengine.com/marketplace/en-US/slug/modular-temple-plaza-4k-pbr
+                                        Link to product is invalid, here how a valid link looks https://www.unrealengine.com/marketplace/en-US/product/modular-temple-plaza-4k-pbr
                                     </FormControl.Feedback>
                                 </InputGroup>
                             </div>
