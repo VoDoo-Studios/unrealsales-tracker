@@ -29,8 +29,8 @@ class KeywordFilter extends PureComponent {
             <div className="keywordfilter">
                 <InputGroup className="pl-3 pr-3 keywordfilter__searchinput">
                     <FormControl
-                        defaultValue={filters.keywordFilter && filters.keywordFilter.terms[0].terms[0].description || ''}
-                        value={filters.keywordFilter && filters.keywordFilter.terms[0].terms[0].description || ''}
+                        defaultValue={filters.keywordFilter?.terms?.[0]?.terms?.[0]?.description ?? ''}
+                        value={filters.keywordFilter?.terms?.[0]?.terms?.[0]?.description ?? ''}
                         placeholder="by keyword"
                         aria-label="by keyword"
                         aria-describedby="basic-addon2"

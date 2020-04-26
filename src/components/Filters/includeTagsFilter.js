@@ -33,7 +33,7 @@ const mapStateToProps = (state) => {
     // Transform tags to pass down to Multiselect as options
     const formattedTags = (tags && tags.map((tag) => { return {label: '+' + tag.toLowerCase(), value: tag}})) || [];
 
-    let selectedTagFilters = filters && filters.tagFilter && filters.tagFilter['tags.name'] || tags;
+    let selectedTagFilters = filters.tagFilter?.['tags.name'] ?? tags;
     selectedTagFilters = selectedTagFilters.filter((tag) => {
         return tags.includes(tag);
     })
