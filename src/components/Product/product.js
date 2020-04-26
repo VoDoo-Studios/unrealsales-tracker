@@ -61,6 +61,7 @@ class Product extends React.PureComponent {
             let filtered = false;
             Object.keys(filters).map((filter) => {
                 if (!matchObject(product, filters[filter])) filtered = true;
+                return true;
             })
             if (filtered) {
                 return null;

@@ -82,7 +82,7 @@ class AddProduct extends React.PureComponent {
                     <Col md={12} className="addproduct__trigger-container">
                         <a 
                             className="addproduct__trigger"
-                            href="" 
+                            href="#addproduct" 
                             onClick={this.onShowClick.bind(this)}
                             aria-controls="addproduct-collapse"
                             aria-expanded={this.state.showAddProduct}>
@@ -137,6 +137,7 @@ class AddProduct extends React.PureComponent {
     constructAddLink() {
         let href = window.location.href;
         let link = href + (href.substring(href.length-1) === '/' ? '' : '/') + 'add?product=';
+        // eslint-disable-next-line no-script-url
         return 'javascript:(function(){if(window.location.href.indexOf("unrealsales.io")!==-1)return;f="' + link + '"+window.location.href;location.href=f;})()'
     }
 }

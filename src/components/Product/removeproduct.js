@@ -57,7 +57,7 @@ class RemoveProduct extends React.PureComponent {
         return (
             <>
                 <a
-                    href=""
+                    href="#remove"
                     className="product__remove"
                     onClick={this.showRemoveConfirmation.bind(this)}
                 >

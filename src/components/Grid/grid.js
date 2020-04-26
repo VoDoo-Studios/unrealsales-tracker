@@ -84,6 +84,7 @@ class Grid extends React.PureComponent {
     constructAddLink() {
         let href = window.location.href;
         let link = href + (href.substring(href.length-1) === '/' ? '' : '/') + 'add?product=';
+        // eslint-disable-next-line no-script-url
         return 'javascript:(function(){f="' + link + '"+window.location.href;location.href=f;})()'
     }
 }
