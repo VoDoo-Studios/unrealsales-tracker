@@ -21,7 +21,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --passWithNoTests",
     "eject": "react-scripts eject",
     "upload": "aws s3 sync build/ s3://unrealsales-tracker --acl public-read --cache-control public,max-age=604800",
     "deploy": "npm run build && npm run upload"
