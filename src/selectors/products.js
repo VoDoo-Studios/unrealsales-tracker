@@ -8,5 +8,6 @@ export const selectFilteredProducts = (state, filters) => Object.keys(slicer(sta
         if (!matchObject(state.products[product], filters[filter])) filtered = true;
     })
     return !filtered;
+// eslint-disable-next-line no-sequences
 }).reduce( (res, key) => (res[key] = state.products[key], res), {} );
 
