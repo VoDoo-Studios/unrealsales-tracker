@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Container, Form, Button, Row, Col, Spinner, Alert } from 'react-bootstrap';
+import { Link } from "react-router-dom";
 
 import { setLoginForm, clearLoginForm, loginUser } from '../../actions/registerActions';
 import { setProcessingForm, setUserToken } from '../../actions/appActions';
@@ -35,8 +36,8 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 const mapStateToProps = (state) => {
-    const isProcessing = (state.app.processing && state.app.processing.loginForm) || false;
-    const loginForm = state.register.loginForm || {};
+    const isProcessing = state?.app?.processing?.loginForm;
+    const loginForm = state?.register?.loginForm ?? {};
 
     return {
         isProcessing,
@@ -131,6 +132,7 @@ class Login extends React.PureComponent {
                                     name="password"
                                     type="password" 
                                     placeholder="Password" />
+                                <Link to="/tracker/reset-password">Forgot password?</Link>
                             </Form.Group>
                             <Button disabled={isProcessing} variant="primary" type="submit">
                                 {isProcessing &&
@@ -138,9 +140,7 @@ class Login extends React.PureComponent {
                                 }
                                 Log in
                             </Button>
-                            <a className="ml-3" href="" onClick={(event) => {event.preventDefault();event.stopPropagation();window.tracker.appHistory.push('/tracker/register')}}>
-                                or Create an account for free
-                            </a>
+                            <Link className="ml-3" to="/tracker/register"> or Create an account for free</Link>
                         </Form>
                     </Col>
                 </Row>

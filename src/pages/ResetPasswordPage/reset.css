@@ -1,0 +1,7 @@
+.reset-page {
+    box-shadow: #ececec 1px 1px 20px 8px;
+    height: 100vh;
+}
+.reset-page__content {
+    margin-top: 40px;
+}

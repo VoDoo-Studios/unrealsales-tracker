@@ -10,6 +10,12 @@ export const setLoginForm = (form) => {
         form,
     };
 };
+export const setResetForm = (form) => {
+    return {
+        type: 'SET_RESET_FORM',
+        form,
+    };
+};
 export const clearLoginForm = () => {
     return {
         type: 'CLEAR_LOGIN_FORM',
@@ -51,6 +57,30 @@ export const loginUser = (formData) => {
 export const registerUser = (formData) => {
     return () => {
         return fetch(window.tracker.api_endpoint + 'profile/register', {
+            method: 'POST',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                ...formData,
+            }),
+        })
+        .then(response => {
+            if (response.ok) {
+                return response.json()
+            }
+            throw response;
+        })
+        .then((response) => {
+            return response;
+        })
+    }
+}
+
+export const resetPassword = (formData) => {
+    return () => {
+        return fetch(window.tracker.api_endpoint + '/profile/reset-password', {
             method: 'POST',
             mode: 'cors',
             headers: {

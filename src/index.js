@@ -18,6 +18,7 @@ import MainPage from './pages/MainPage/mainpage';
 import Tracker from './pages/TrackerPage/tracker';
 import Register from './pages/Register/register';
 import Login from './pages/LoginPage/login';
+import Reset from './pages/ResetPasswordPage/reset'
 import ExtAdd from './pages/ExtAddPage/extadd';
 import Terms from './pages/TermsPage/terms';
 
@@ -49,6 +50,7 @@ ReactDOM.render(
                 <Route exact path="/tracker/" component={Tracker}/>
                 <Route exact path="/tracker/register" component={Register}/>
                 <Route exact path="/tracker/login" component={Login}/>
+                <Route exact path="/tracker/reset-password" component={Reset}/>
                 <Route exact path="/tracker/add" component={ExtAdd}/>
                 <Route exact path="/tracker/terms-conditions" component={Terms}/>
             </Switch>

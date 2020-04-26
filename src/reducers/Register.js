@@ -21,6 +21,14 @@ const register = (state = {}, data) => {
                     ...data.form
                 }
             }
+        case 'SET_RESET_FORM':
+            return {
+                ...state,
+                resetForm: {
+                    ...state.resetForm,
+                    ...data.form
+                }
+            }
         case 'CLEAR_LOGIN_FORM':
             return {
                 ...state,
