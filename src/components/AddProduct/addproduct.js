@@ -60,7 +60,7 @@ class AddProduct extends React.PureComponent {
             });
         }
         setProcessingForm('addingProduct', true);
-        let slug = slugMatches[3]
+        let slug = slugMatches[4]
         let productData = await addProduct(slug);
         await addProductToList(slug, listId);
         setProduct(slug, productData);
