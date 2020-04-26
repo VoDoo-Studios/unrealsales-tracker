@@ -16,6 +16,12 @@ export const setResetForm = (form) => {
         form,
     };
 };
+export const setChangePasswordForm = (form) => {
+    return {
+        type: 'SET_CHANGEPASSWORD_FORM',
+        form,
+    };
+};
 export const clearLoginForm = () => {
     return {
         type: 'CLEAR_LOGIN_FORM',
@@ -93,6 +99,30 @@ export const resetPassword = (formData) => {
         .then(response => {
             if (response.ok) {
                 return response.json()
+            }
+            throw response;
+        })
+        .then((response) => {
+            return response;
+        })
+    }
+}
+
+export const changePassword = (formData) => {
+    return () => {
+        return fetch(window.tracker.api_endpoint + '/profile/change-password', {
+            method: 'POST',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                ...formData,
+            }),
+        })
+        .then(response => {
+            if (response.ok) {
+                return response.text()
             }
             throw response;
         })

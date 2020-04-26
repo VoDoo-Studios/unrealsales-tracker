@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Container, Form, Button, Row, Col, Spinner, Alert } from 'react-bootstrap';
 import { Link } from "react-router-dom";
+import { getUrlParameter } from '../../modules/query';
 
 import { setLoginForm, clearLoginForm, loginUser } from '../../actions/registerActions';
 import { setProcessingForm, setUserToken } from '../../actions/appActions';
@@ -9,12 +10,7 @@ import { setProcessingForm, setUserToken } from '../../actions/appActions';
 import Header from '../../components/Header/header';
 
 import './login.css';
-const getUrlParameter = (name) => {
-    name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
-    let regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
-    let results = regex.exec(window.location.search);
-    return results && results.length > 0 ? decodeURIComponent(results[1].replace(/\+/g, ' ')) : false;
-};
+
 const mapDispatchToProps = (dispatch) => {
     return {
         setProcessingForm: (form, value) => {
