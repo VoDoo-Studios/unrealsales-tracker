@@ -5,6 +5,7 @@ import { matchObject } from 'searchjs';
 import stringToColor from '../../modules/strToColor';
 
 import { setFilters } from '../../actions/appActions';
+import { selectFilters, selectFilteredFilters } from '../../selectors/filters';
 
 const mapDispatchToProps = (dispatch) => {
     return {
@@ -14,11 +15,10 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 const mapStateToProps = (state) => {
-    const filters = state.app.filters || {};
+    const filters = selectFilters(state);
 
-    // Retrieve all filters except the current one
-    let filteredFilters = Object.keys(filters).filter((filter) => filter !== 'categoryFilter')
-        .reduce( (res, key) => (res[key] = filters[key], res), {} );
+    // Retrieve all filters except the current one 
+    let filteredFilters = selectFilteredFilters(state, 'categoryFilter');
 
     // Filter out products that had been already filtered by other filters
     const filteredProducts = Object.keys(state.products).filter((product) => {

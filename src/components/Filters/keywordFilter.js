@@ -4,6 +4,7 @@ import { InputGroup, FormControl, Button } from 'react-bootstrap';
 import { FaBackspace } from 'react-icons/fa';
 
 import { setFilters } from '../../actions/appActions';
+import { selectFilters } from '../../selectors/filters';
 
 const mapDispatchToProps = (dispatch) => {
     return {
@@ -13,7 +14,7 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 const mapStateToProps = (state) => {
-    const filters = state.app.filters || {};
+    const filters = selectFilters(state);
 
     return {
         filters,

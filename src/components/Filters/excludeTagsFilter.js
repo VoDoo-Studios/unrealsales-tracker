@@ -4,6 +4,7 @@ import { matchObject } from 'searchjs';
 import MultiSelect from "@khanacademy/react-multi-select";
 
 import { setFilters } from '../../actions/appActions';
+import { selectFilters, selectFilteredFilters } from '../../selectors/filters';
 
 
 const mapDispatchToProps = (dispatch) => {
@@ -14,11 +15,10 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 const mapStateToProps = (state) => {
-    const filters = state.app.filters || {};
+    const filters = selectFilters(state);
 
     // Retrieve all filters except the current one
-    let filteredFilters = Object.keys(filters).filter((filter) => filter !== 'excludeTagFilter')
-        .reduce( (res, key) => (res[key] = filters[key], res), {} );
+    let filteredFilters = selectFilteredFilters(state, 'excludeTagFilter');
 
     // Filter out products that had been already filtered by other filters
     const filteredProducts = Object.keys(state.products).filter((product) => {
@@ -39,7 +39,7 @@ const mapStateToProps = (state) => {
     // Transform tags to pass down to Multiselect as options
     const formattedTags = (tags && tags.map((tag) => { return {label: '-' + tag.toLowerCase(), value: tag}})) || [];
 
-    let selectedTagFilters = filters && filters.excludeTagFilter && filters.excludeTagFilter['tags.name'] || [];
+    let selectedTagFilters = (filters && filters.excludeTagFilter && filters.excludeTagFilter['tags.name']) || [];
     selectedTagFilters = selectedTagFilters.filter((tag) => {
         return tags.includes(tag);
     })
