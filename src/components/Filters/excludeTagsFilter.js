@@ -1,10 +1,10 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import { matchObject } from 'searchjs';
 import MultiSelect from "@khanacademy/react-multi-select";
 
 import { setFilters } from '../../actions/appActions';
 import { selectFilters, selectFilteredFilters } from '../../selectors/filters';
+import { selectFilteredProducts } from '../../selectors/products';
 
 
 const mapDispatchToProps = (dispatch) => {
@@ -21,13 +21,7 @@ const mapStateToProps = (state) => {
     let filteredFilters = selectFilteredFilters(state, 'excludeTagFilter');
 
     // Filter out products that had been already filtered by other filters
-    const filteredProducts = Object.keys(state.products).filter((product) => {
-        let filtered = false;
-        Object.keys(filteredFilters).map((filter) => {
-            if (!matchObject(state.products[product], filteredFilters[filter])) filtered = true;
-        })
-        return !filtered;
-    }).reduce( (res, key) => (res[key] = state.products[key], res), {} );
+    const filteredProducts = selectFilteredProducts(state, filteredFilters);
 
     // Retrieve tags from already filtered products
     const tags = [...new Set(Object.keys(filteredProducts).flatMap((product) => {
