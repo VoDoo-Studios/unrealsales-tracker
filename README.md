@@ -1,3 +1,6 @@
+
+![Test](https://github.com/CGeorges/unrealsales-tracker/workflows/Test/badge.svg)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
