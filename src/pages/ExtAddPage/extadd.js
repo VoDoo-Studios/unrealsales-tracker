@@ -118,7 +118,7 @@ class ExtAdd extends React.PureComponent {
             url: '',
         };
     
-        name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+        name = name.replace(/[[]/, '\\[').replace(/[\]]/, '\\]');
         let regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
         let results = regex.exec(window.location.search);
         response.url = results && results.length > 0 ? decodeURIComponent(results[1].replace(/\+/g, ' ')) : '';

@@ -126,7 +126,7 @@ class Register extends React.PureComponent {
                                     name="terms"
                                     onChange={this.onChange.bind(this)}
                                     type="checkbox"
-                                    label={(<span>I agree to the <a onClick={(event) => { event.preventDefault(); event.stopPropagation(); window.tracker.appHistory.push('/tracker/terms-conditions') }} href="">terms and conditions</a></span>)} />
+                                    label={(<span>I agree to the <a onClick={(event) => { event.preventDefault(); event.stopPropagation(); window.tracker.appHistory.push('/tracker/terms-conditions') }} href="#terms">terms and conditions</a></span>)} />
                                 <Form.Control.Feedback type="invalid">
                                     It's this or we make our lawyers meet, but let's use this first.
                             </Form.Control.Feedback>
