@@ -33,7 +33,9 @@ const rates = parsedRates && Object.keys(parsedRates)
     }
     return parsedRates[key];
 } )
-.reduce( (res, key) => (res[key] = parsedRates[key], res), {} );
+.reduce( (res, key) => {
+    return (res[key] = parsedRates[key], res);
+}, {} );
 
 const persistedState = {
     app: {
