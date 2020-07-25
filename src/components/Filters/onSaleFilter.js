@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Form } from 'react-bootstrap';
 
 import { setFilters } from '../../actions/appActions';
+import { selectFilters } from '../../selectors/filters';
 
 const mapDispatchToProps = (dispatch) => {
     return {
@@ -10,6 +11,13 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(setFilters(filters));
         }
     };
+};
+const mapStateToProps = (state) => {
+    const filters = selectFilters(state);
+
+    return {
+        filters,
+    }
 };
 
 class OnSaleFilter extends PureComponent {
@@ -43,4 +51,4 @@ class OnSaleFilter extends PureComponent {
     }
 }
 
-export default OnSaleFilter = connect(null, mapDispatchToProps)(OnSaleFilter);
+export default OnSaleFilter = connect(mapStateToProps, mapDispatchToProps)(OnSaleFilter);
