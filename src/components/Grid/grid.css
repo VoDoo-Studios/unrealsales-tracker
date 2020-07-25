@@ -4,6 +4,9 @@
     border-left: 0.12rem solid #ececec;
     border-right: 0.12rem solid #ececec;
     border-bottom: 0.12rem solid #ececec;
+    display: flex;
+    flex: 1 1 0;
+    flex-wrap: wrap;
 }
 .grid-loader {
     margin-top: 200px;
@@ -13,4 +16,19 @@
 .grid-noproducts {
     text-align: center;
     margin-top:100px;
+}
+@media (min-width: 576px) {
+    .grid .card {
+        max-width: 100%;
+    }
+}
+@media (min-width: 768px){
+    .grid .card {
+        max-width: 17rem;
+    }
+}
+@media (min-width: 1100px){
+    .grid .card {
+        max-width: 15.8rem;
+    }
 }

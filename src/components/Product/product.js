@@ -68,7 +68,7 @@ class Product extends React.PureComponent {
             }
         }
         return (
-            <Card style={{ maxWidth: '17rem' }} className="product">
+            <Card className="product">
                 <div className="product__image-container">
                     <Card.Img variant="top" src={product.thumbnail} />
                     <div className="product__image-overlay">
