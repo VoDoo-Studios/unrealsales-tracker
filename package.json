@@ -1,6 +1,6 @@
 {
   "name": "unrealsales-tracker",
-  "version": "0.2.13",
+  "version": "0.3.0",
   "private": true,
   "dependencies": {
     "@khanacademy/react-multi-select": "^0.3.3",
