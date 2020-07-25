@@ -121,13 +121,24 @@ class Product extends React.PureComponent {
     convertPrice(price) {
        
         const { product, currency, currencyRate } = this.props;
-        price = price / 100;
+        
+        let taxDiscount = 0;
 
         let formattedCurrencyCode = currency;
         if (currency === 'EUR') formattedCurrencyCode = '€';
-        if (currency === 'USD') formattedCurrencyCode = '$';
-        if (currency === 'GBP') formattedCurrencyCode = '£';
-        if (currency === 'RUB') formattedCurrencyCode = '₽';
+        if (currency === 'USD') {
+            taxDiscount = 0.156;
+            formattedCurrencyCode = '$';
+        }
+        if (currency === 'GBP') {
+            taxDiscount = 0.05;   
+            formattedCurrencyCode = '£';
+        }
+        if (currency === 'RUB') {
+            taxDiscount = 0.05;
+            formattedCurrencyCode = '₽';
+        }
+        price = (price / 100) - (taxDiscount * (price / 100));
 
         if (!currencyRate || currency === product.currencyCode) return formattedCurrencyCode + price;
         return formattedCurrencyCode + (price / currencyRate[product.currencyCode]).toFixed(2);
