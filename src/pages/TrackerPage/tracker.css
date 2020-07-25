@@ -1,4 +1,8 @@
 .list-page { 
     box-shadow: #ececec 1px 1px 20px 8px;
     min-height:100vh;
-  }
+}
+.tracker-footer {
+    padding: 20px;
+    font-size: 14px;
+}
