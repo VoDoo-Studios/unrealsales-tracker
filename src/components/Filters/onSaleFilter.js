@@ -34,6 +34,9 @@ class OnSaleFilter extends PureComponent {
                 'discounted': event.currentTarget.checked,
             }
         }
+        if (!event.currentTarget.checked) {
+            delete newFilters.onSaleFilter;
+        }
 
         setFilters(newFilters);
 
