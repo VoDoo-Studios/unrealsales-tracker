@@ -6,17 +6,17 @@
     "@khanacademy/react-multi-select": "^0.3.3",
     "array-flat-polyfill": "^1.0.1",
     "react": "^16.13.1",
-    "react-bootstrap": "^1.0.1",
+    "react-bootstrap": "^1.3.0",
     "react-dom": "^16.13.1",
     "react-icons": "^3.10.0",
     "react-redux": "^7.2.0",
-    "react-router": "^5.1.2",
-    "react-router-dom": "^5.1.2",
+    "react-router": "^5.2.0",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
     "read-more-react": "^1.0.10",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
-    "searchjs": "^1.0.2"
+    "searchjs": "^1.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
