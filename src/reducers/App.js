@@ -18,6 +18,16 @@ const app = (state = {}, data) => {
                 ...state,
                 filters: data.filters,
             }
+        case 'SET_CURRENCY':
+            return {
+                ...state,
+                currency: data.currency,
+            }
+        case 'SET_CURRENCY_RATES':
+            return {
+                ...state,
+                rates: data.rates,
+            }
         default:
             return state;
     }

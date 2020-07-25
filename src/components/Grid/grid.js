@@ -2,7 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Spinner, CardColumns } from 'react-bootstrap';
 import { getLists } from '../../actions/listsActions';
-import { setProcessingForm } from '../../actions/appActions';
+import { setProcessingForm, getCurrencyRates } from '../../actions/appActions';
+import { selectCurrency, selectCurrencyRate } from '../../selectors/currency';
 
 import Product from '../Product/product';
 
@@ -12,16 +13,21 @@ const mapDispatchToProps = (dispatch) => {
     return {
         setProcessingForm: (form, value) => dispatch(setProcessingForm(form, value)),
         getLists: () => dispatch(getLists()),
+        getCurrencyRates: (baseRate) => dispatch(getCurrencyRates(baseRate)),
     }
 }
 const mapStateToProps = (state) => {
     const isProcessing = (state.app.processing && state.app.processing.retrieveLists) || false;
     const products = (state.lists && Object.keys(state.lists).length > 0 && state.lists[0].items) || false;
     const lists = state.lists || false;
+    const currency = selectCurrency(state);
+    const currencyRate = selectCurrencyRate(state, currency);
     return {
         isProcessing,
         products,
         lists,
+        currency,
+        currencyRate,
     }
 };
 
@@ -37,6 +43,12 @@ class Grid extends React.PureComponent {
         } catch (e) {
             console.error(e);
             setProcessingForm('retrieveLists', false);
+        }
+    }
+    async componentDidUpdate() {
+        const { currency, currencyRate, getCurrencyRates } = this.props;
+        if (!currencyRate) {
+            await getCurrencyRates(currency);
         }
     }
 

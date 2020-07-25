@@ -6,6 +6,7 @@ import { FaExternalLinkAlt } from 'react-icons/fa';
 import ReadMoreReact from 'read-more-react';
 import RemoveProduct from './removeproduct';
 import stringToColor from '../../modules/strToColor';
+import { selectCurrency, selectCurrencyRate } from '../../selectors/currency';
 
 import { setProcessingForm } from '../../actions/appActions';
 import { postProduct, setProduct } from '../../actions/productsActions';
@@ -24,11 +25,15 @@ const mapStateToProps = (state, ownProps) => {
     const slug = ownProps.slug;
     const product = state.products[slug] || false;
     const filters = state.app.filters || {};
+    const currency = selectCurrency(state);
+    const currencyRate = selectCurrencyRate(state, currency);
     return {
         isProcessing,
         slug,
         product,
         filters,
+        currency,
+        currencyRate,
     }
 };
 
@@ -93,9 +98,9 @@ class Product extends React.PureComponent {
 
                 <Card.Body>
                     <div className="product__badges">
-                        <Badge variant="secondary"> {product.price} </Badge>
+                        <Badge variant="secondary"> {this.convertPrice(product.priceValue)} </Badge>
                         {product.discounted &&
-                            <Badge variant="danger"> {product.discountPrice} </Badge>
+                            <Badge variant="danger"> {this.convertPrice(product.discountPriceValue)} </Badge>
                         }
                         <Badge variant="info" className="product__category" style={{ 
                                 backgroundColor: stringToColor(product.categories[0].name)
@@ -111,6 +116,21 @@ class Product extends React.PureComponent {
                 </Card.Body>
             </Card>
         )
+    }
+
+    convertPrice(price) {
+       
+        const { product, currency, currencyRate } = this.props;
+        price = price / 100;
+
+        let formattedCurrencyCode = currency;
+        if (currency === 'EUR') formattedCurrencyCode = '€';
+        if (currency === 'USD') formattedCurrencyCode = '$';
+        if (currency === 'GBP') formattedCurrencyCode = '£';
+        if (currency === 'RUB') formattedCurrencyCode = '₽';
+
+        if (!currencyRate || currency === product.currencyCode) return formattedCurrencyCode + price;
+        return formattedCurrencyCode + (price / currencyRate[product.currencyCode]).toFixed(2);
     }
 }
 

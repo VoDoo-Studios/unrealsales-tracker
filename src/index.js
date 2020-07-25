@@ -24,13 +24,30 @@ import ChangePassword from './pages/ChangePasswordPage/changePassword';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const persistedLogin = localStorage.getItem('userToken') ? {app: {userToken: localStorage.getItem('userToken')}} : {}
+// Rehydrate currency rates that are not older than 24 hours
+let parsedRates = JSON.parse(localStorage.getItem('rates'));
+const rates = parsedRates && Object.keys(parsedRates)
+.filter( key => {
+    if (((new Date()) - (new Date(parsedRates[key].timestamp))) > (60 * 60 * 1000 * 24) ) {
+        return undefined;
+    }
+    return parsedRates[key];
+} )
+.reduce( (res, key) => (res[key] = parsedRates[key], res), {} );
+
+const persistedState = {
+    app: {
+        userToken: localStorage.getItem('userToken'),
+        currency: localStorage.getItem('currency'),
+        rates: rates,
+    }
+};
 
 window.tracker = {};
 
 let store = createStore(
 	unrealTracker,
-    persistedLogin,
+    persistedState,
 	composeEnhancers(applyMiddleware(thunk)),
 );
 // Link history API
