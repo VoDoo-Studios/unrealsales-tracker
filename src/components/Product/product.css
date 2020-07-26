@@ -50,6 +50,12 @@
 a.product__remove {
     margin-left:2rem;
 }
+.product.card a.product__move {
+    display: block;
+    width: 100%;
+    text-decoration: underline;
+    padding:1rem;
+}
 @media (min-width: 576px) {
     .card-columns {
         column-count: 2;

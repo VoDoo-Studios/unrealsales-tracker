@@ -5,6 +5,7 @@ import { FaTrashAlt } from 'react-icons/fa';
 
 import { setProcessingForm } from '../../actions/appActions';
 import { removeProductFromList, getLists } from '../../actions/listsActions';
+import { selectSelectedList } from '../../selectors/lists';
 
 const mapDispatchToProps = (dispatch) => {
     return {
@@ -17,13 +18,13 @@ const mapStateToProps = (state, ownProps) => {
     const isProcessing = (state.app.processing && state.app.processing.removingProduct) || false;
     const slug = ownProps.slug;
     const product = state.products[slug] || false;
-    const listId = (state.lists && Object.keys(state.lists).length > 0 && state.lists[0].listId) || false;
+    const selectedList = selectSelectedList(state);
 
     return {
         isProcessing,
         slug,
         product,
-        listId,
+        selectedList,
     }
 };
 
@@ -44,9 +45,9 @@ class RemoveProduct extends React.PureComponent {
     }
 
     async onRemove() {
-        const { slug, listId, removeProductFromList, setProcessingForm, getLists } = this.props;
+        const { slug, selectedList, removeProductFromList, setProcessingForm, getLists } = this.props;
         setProcessingForm('removingProduct', true);
-        await removeProductFromList(slug, listId);
+        await removeProductFromList(slug, selectedList);
         await getLists();
         window.gtag('event', 'tracker', {'type': 'delete', 'slug': slug})
         setProcessingForm('removingProduct', false);

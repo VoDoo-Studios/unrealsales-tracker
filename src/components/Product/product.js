@@ -5,6 +5,7 @@ import { matchObject } from 'searchjs';
 import { FaExternalLinkAlt } from 'react-icons/fa';
 import ReadMoreReact from 'read-more-react';
 import RemoveProduct from './removeproduct';
+import MoveToList from './movetolist';
 import stringToColor from '../../modules/strToColor';
 import { selectCurrency, selectCurrencyRate } from '../../selectors/currency';
 
@@ -86,6 +87,7 @@ class Product extends React.PureComponent {
                             <FaExternalLinkAlt size='2rem'/>
                         </a>
                         <RemoveProduct slug={slug}/>
+                        <MoveToList slug={slug}/>
                     </div>
                     <div className="product__image-badgeoverlay">
                         {product.discounted &&
