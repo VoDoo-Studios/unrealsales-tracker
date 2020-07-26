@@ -1,5 +1,5 @@
 .register-page {
-    box-shadow: #ececec 1px 1px 20px 8px;
+    box-shadow: #ececec 1px 1px 20px -4px;
     height: 100vh;
 }
 .register-page__content {

@@ -1,3 +1,6 @@
+.card-title {
+    margin: .75rem 0;
+}
 .product__badges .badge:not(:first-child) {
     margin-left:0.5rem;
 }

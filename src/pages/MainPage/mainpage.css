@@ -1,5 +1,5 @@
 .main-page {
-    box-shadow: #ececec 1px 1px 20px 8px;
+    box-shadow: #ececec 1px 1px 20px -4px;
     min-height:100vh;
 }
 .main-page .unreal-tracker__header {
