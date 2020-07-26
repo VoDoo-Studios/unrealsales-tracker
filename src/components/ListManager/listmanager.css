@@ -1,0 +1,6 @@
+.list-manager__item {
+    padding: 0.5rem;
+}
+.list-manager__item .badge {
+    margin-left: 0.5rem;
+}

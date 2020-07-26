@@ -4,6 +4,7 @@ import { Dropdown } from 'react-bootstrap';
 import { setSelectedList, setProcessingForm } from '../../actions/appActions';
 import { getLists } from '../../actions/listsActions';
 import { selectLists, selectSelectedList, selectList } from '../../selectors/lists';
+import ListManager from '../ListManager/listmanager';
 import './listselector.css';
 
 const mapStateToProps = (state) => {
@@ -27,6 +28,12 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 class ListSelector extends React.PureComponent {
+    constructor() {
+        super();
+        this.state = {
+            showManager: false,
+        }
+    }
     async componentDidMount() {
         const { getLists, setProcessingForm, lists } = this.props;
         try {
@@ -46,7 +53,16 @@ class ListSelector extends React.PureComponent {
     }
     onSelect(eventKey) {
         const { setSelectedList } = this.props;
+        if (eventKey === 'manage') {
+            this.onToggleManager();
+            return;
+        }
         setSelectedList(eventKey);
+    }
+    onToggleManager() {
+        this.setState({
+            showManager: !this.state.showManager,
+        });
     }
     render() {
         const { lists, list } = this.props;
@@ -63,8 +79,14 @@ class ListSelector extends React.PureComponent {
                                 return (<Dropdown.Item key={lists[key].listId} eventKey={lists[key].listId}>{lists[key].listName}</Dropdown.Item>);
                             })
                         }
+                        <Dropdown.Divider/>
+                        <Dropdown.Item eventKey="manage">Manage lists</Dropdown.Item>
                     </Dropdown.Menu>
                 </Dropdown>
+                <ListManager
+                    onManagerToggle={this.onToggleManager.bind(this)}
+                    showManager={this.state.showManager}
+                />
             </div>
         )
     }
