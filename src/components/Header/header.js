@@ -44,7 +44,7 @@ class Header extends React.PureComponent {
                             <Nav.Link href="" onClick={this.logout.bind(this)}>Logout</Nav.Link>
                         }
                     </Nav>
-                    {userToken &&
+                    {userToken && window.tracker.appHistory.location.pathname === '/tracker/' &&
                         <>
                             <ListSelector />
                             <Currency />
