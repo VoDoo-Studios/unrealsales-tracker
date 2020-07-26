@@ -58,13 +58,23 @@ class MainPage extends React.PureComponent {
                     <Col lg={4} sm={12}>
                         <Card style={{ width: '18rem' }}>
                             <Card.Body>
-                                <Badge pill variant="success">
-                                    Coming soon
-                                </Badge>
                                 <Card.Title>Multiple lists</Card.Title>
                                 <Card.Text>
                                     Create a list for every project, you can manage multiple
                                     lists.
+                                </Card.Text>
+                            </Card.Body>
+                        </Card>
+                    </Col>
+                    <Col lg={4} sm={12}>
+                        <Card style={{ width: '18rem' }}>
+                            <Card.Body>
+                                <Badge pill variant="success">
+                                    Coming soon
+                                </Badge>
+                                <Card.Title>Discover</Card.Title>
+                                <Card.Text>
+                                    Discover new assets by finding most reviewed, most wishlisted and more.
                                 </Card.Text>
                             </Card.Body>
                         </Card>
@@ -82,7 +92,6 @@ class MainPage extends React.PureComponent {
                             </Card.Body>
                         </Card>
                     </Col>
-                    
                 </Row>
                 <Row className="main-page__cta">
                     <h2>
