@@ -23,6 +23,7 @@ const mapDispatchToProps = (dispatch) => {
 class Currency extends React.PureComponent {
     onSelect(eventKey, event) {
         const { setCurrency } = this.props;
+        window.gtag('event', 'tracker', {'type': 'currency', 'currency': event.target.innerHTML})
         setCurrency(event.target.innerHTML);
     }
     render() {
