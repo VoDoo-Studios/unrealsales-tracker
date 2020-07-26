@@ -4,6 +4,11 @@
 .list-manager__item .badge {
     margin-left: 0.5rem;
 }
+.list-manager__item-delete {
+    right: 40px;
+    position: absolute;
+    color: red;
+}
 .list-manager__new {
     border-top: 1px #ccc solid;
     padding-top: 1rem;

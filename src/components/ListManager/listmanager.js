@@ -1,14 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Modal, Button, Badge, InputGroup, Form, Spinner } from 'react-bootstrap';
-import { getLists, createList } from '../../actions/listsActions';
+import { getLists, createList, removeList } from '../../actions/listsActions';
 import { setProcessingForm } from '../../actions/appActions';
 import { selectLists, selectSelectedList, selectList } from '../../selectors/lists';
+import { FaTrashAlt } from 'react-icons/fa';
 
 import './listmanager.css';
 
 const mapStateToProps = (state) => {
-    const isProcessing = (state.app.processing && state.app.processing.creatingList) || false;
+    const isProcessing = (state.app.processing && state.app.processing.operateList) || false;
     const lists = selectLists(state);
     const selectedList = selectSelectedList(state);
     const list = selectList(state, selectedList);
@@ -23,6 +24,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         getLists: () => dispatch(getLists()),
         createList: (name) => dispatch(createList(name)),
+        removeList: (listId) => dispatch(removeList(listId)),
         setProcessingForm: (form, value) => dispatch(setProcessingForm(form, value)),
     };
 };
@@ -37,9 +39,16 @@ class ListManager extends React.PureComponent {
         const { createList, setProcessingForm } = this.props;
         if (!this.state.createListInput) return;
 
-        setProcessingForm('creatingList', true);
+        setProcessingForm('operateList', true);
         await createList(this.state.createListInput);
-        setProcessingForm('creatingList', false);
+        setProcessingForm('operateList', false);
+    }
+    async onDelete(list) {
+        const { removeList, setProcessingForm } = this.props;
+        if (!window.confirm("Are you sure you want to remove list " + list.listName)) return;
+        setProcessingForm('operateList', true);
+        await removeList(list.listId);
+        setProcessingForm('operateList', false);
     }
     render() {
         const { onManagerToggle, showManager, lists, isProcessing } = this.props;
@@ -51,9 +60,15 @@ class ListManager extends React.PureComponent {
                 <Modal.Body>
                     {Object.keys(lists).map((listKey) => {
                             return (
-                                <p className="list-manager__item">
+                                <p key={listKey} className="list-manager__item">
                                     {lists[listKey].listName}
-                                    <Badge variant="info">{lists[listKey].items.length-1}</Badge>
+                                    <Badge variant="info">{lists?.[listKey]?.items?.length-1}</Badge>
+                                    {!isProcessing &&
+                                        <FaTrashAlt className="list-manager__item-delete" onClick={this.onDelete.bind(this, lists[listKey])}/>
+                                    }
+                                    {isProcessing &&
+                                        <Spinner className="list-manager__item-delete" animation="grow" size="sm" variant="warning"/>
+                                    }
                                 </p>
                             )
                         })

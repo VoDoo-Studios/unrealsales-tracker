@@ -15,7 +15,7 @@ export const getLists = () => {
             throw response;
         })
         .then((response) => {
-            if (response.Count > 0) {
+            if (response.Items) {
                 return dispatch(setLists(response.Items));
             }
             throw response;
@@ -35,9 +35,31 @@ export const createList = (name) => {
                 listName: name,
             }),
         })
-        .then(response => {
+        .then(async response => {
             if (response.ok) {
-                dispatch(getLists());
+                await dispatch(getLists());
+                return response.text();
+            }
+            throw response;
+        })
+    }
+}
+export const removeList = (listId) => {
+    return (dispatch, getState) => {
+        return fetch(window.tracker.api_endpoint + 'lists', {
+            method: 'DELETE',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + getState().app.userToken,
+            },
+            body: JSON.stringify({
+                listId: listId,
+            }),
+        })
+        .then(async response => {
+            if (response.ok) {
+                await dispatch(getLists());
                 return response.text();
             }
             throw response;
