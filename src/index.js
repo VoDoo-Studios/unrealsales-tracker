@@ -43,6 +43,7 @@ const persistedState = {
         userToken: localStorage.getItem('userToken'),
         currency: localStorage.getItem('currency'),
         rates: rates,
+        list: localStorage.getItem('listId'),
     }
 };
 

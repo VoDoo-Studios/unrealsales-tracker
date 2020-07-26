@@ -53,6 +53,7 @@ export const getCurrencyRates = (baseRate) => {
     }
 }
 export const setSelectedList = (listId) => {
+    localStorage.setItem('listId', listId);
     return {
         type: 'SET_SELECTED_LIST',
         listId,
