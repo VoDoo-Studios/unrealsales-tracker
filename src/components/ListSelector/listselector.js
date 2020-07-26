@@ -52,7 +52,7 @@ class ListSelector extends React.PureComponent {
         const { lists, list } = this.props;
         return (
             <div>
-                <Dropdown onSelect={this.onSelect.bind(this)}>
+                <Dropdown onSelect={this.onSelect.bind(this)} className="list-selector">
                     <Dropdown.Toggle variant="primary">
                         {list.listName}
                     </Dropdown.Toggle>

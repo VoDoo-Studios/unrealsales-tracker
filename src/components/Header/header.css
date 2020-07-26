@@ -6,3 +6,7 @@
     border-bottom:0.22rem solid #ececec;
     margin: 0 -15px;
 }
+.unreal-tracker__header .list-selector {
+    margin-right:1rem;
+    padding: .5rem 0;
+}
