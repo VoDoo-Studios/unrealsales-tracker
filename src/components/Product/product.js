@@ -57,7 +57,7 @@ class Product extends React.PureComponent {
 
         if (!product) {
             return (
-                <Card style={{ maxWidth: '17rem', minHeight: '30rem' }}>
+                <Card style={{ maxWidth: '15rem', minHeight: '30rem' }}>
                 </Card>
             )
         }
