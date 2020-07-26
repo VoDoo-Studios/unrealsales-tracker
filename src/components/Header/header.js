@@ -22,6 +22,8 @@ class Header extends React.PureComponent {
     }
     logout() {
         localStorage.removeItem('userToken');
+        localStorage.removeItem('listId');
+        localStorage.removeItem('rates');
         window.location.reload();
     }
     render() {
