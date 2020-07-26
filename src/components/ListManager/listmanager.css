@@ -4,3 +4,7 @@
 .list-manager__item .badge {
     margin-left: 0.5rem;
 }
+.list-manager__new {
+    border-top: 1px #ccc solid;
+    padding-top: 1rem;
+}

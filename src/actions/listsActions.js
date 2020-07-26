@@ -1,3 +1,49 @@
+export const getLists = () => {
+    return (dispatch, getState) => {
+        return fetch(window.tracker.api_endpoint + 'lists', {
+            method: 'GET',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + getState().app.userToken,
+            },
+        })
+        .then(response => {
+            if (response.ok) {
+                return response.json()
+            }
+            throw response;
+        })
+        .then((response) => {
+            if (response.Count > 0) {
+                return dispatch(setLists(response.Items));
+            }
+            throw response;
+        })
+    }
+}
+export const createList = (name) => {
+    return (dispatch, getState) => {
+        return fetch(window.tracker.api_endpoint + 'lists', {
+            method: 'POST',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + getState().app.userToken,
+            },
+            body: JSON.stringify({
+                listName: name,
+            }),
+        })
+        .then(response => {
+            if (response.ok) {
+                dispatch(getLists());
+                return response.text();
+            }
+            throw response;
+        })
+    }
+}
 export const addProductToList = (slug, listId) => {
     return (dispatch, getState) => {
         return fetch(window.tracker.api_endpoint + 'lists/products', {
@@ -37,30 +83,6 @@ export const removeProductFromList = (slug, listId) => {
         .then(response => {
             if (response.ok) {
                 return response.text();
-            }
-            throw response;
-        })
-    }
-}
-export const getLists = () => {
-    return (dispatch, getState) => {
-        return fetch(window.tracker.api_endpoint + 'lists', {
-            method: 'GET',
-            mode: 'cors',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + getState().app.userToken,
-            },
-        })
-        .then(response => {
-            if (response.ok) {
-                return response.json()
-            }
-            throw response;
-        })
-        .then((response) => {
-            if (response.Count > 0) {
-                return dispatch(setLists(response.Items));
             }
             throw response;
         })
