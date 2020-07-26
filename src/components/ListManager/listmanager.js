@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Modal, Button, Badge, InputGroup, Form, Spinner } from 'react-bootstrap';
-import { getLists, createList, removeList } from '../../actions/listsActions';
+import { createList, removeList } from '../../actions/listsActions';
 import { setProcessingForm } from '../../actions/appActions';
 import { selectLists, selectSelectedList, selectList } from '../../selectors/lists';
 import { FaTrashAlt } from 'react-icons/fa';
@@ -22,7 +22,6 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = (dispatch) => {
     return {
-        getLists: () => dispatch(getLists()),
         createList: (name) => dispatch(createList(name)),
         removeList: (listId) => dispatch(removeList(listId)),
         setProcessingForm: (form, value) => dispatch(setProcessingForm(form, value)),
