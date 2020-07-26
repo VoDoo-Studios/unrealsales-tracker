@@ -6,6 +6,7 @@ import { FaPlusCircle, FaMinusCircle } from 'react-icons/fa';
 import { setProcessingForm } from '../../actions/appActions';
 import { addProductToList, getLists } from '../../actions/listsActions';
 import { postProduct, setProduct } from '../../actions/productsActions';
+import { selectSelectedList } from '../../selectors/lists';
 
 import './addproduct.css';
 
@@ -20,7 +21,7 @@ const mapDispatchToProps = (dispatch) => {
 }
 const mapStateToProps = (state) => {
     const isProcessing = (state.app.processing && state.app.processing.addingProduct) || false;
-    const listId = (state.lists && Object.keys(state.lists).length > 0 && state.lists[0].listId) || false;
+    const listId = selectSelectedList(state);
 
     return {
         isProcessing,
