@@ -38,7 +38,8 @@ class Tracker extends React.PureComponent {
                 <Filters/>
                 <Grid/>
                 <div className="tracker-footer">
-                    Need of support? create an issue <a href="https://github.com/CGeorges/unrealsales-tracker/issues">here</a>. This project is OpenSource, feel free to <a href="https://github.com/CGeorges/unrealsales-tracker">contribute</a>.
+                    Need of support? create an issue <a target="_blank" rel="noopener noreferrer" href="https://github.com/CGeorges/unrealsales-tracker/issues">here</a>. 
+                    This project is OpenSource, feel free to <a target="_blank" rel="noopener noreferrer" href="https://github.com/CGeorges/unrealsales-tracker">contribute</a>.
                 </div>
             </Container>
         )

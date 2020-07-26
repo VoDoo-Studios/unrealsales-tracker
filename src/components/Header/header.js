@@ -41,6 +41,7 @@ class Header extends React.PureComponent {
                         {userToken &&
                             <Nav.Link href="" onClick={this.logout.bind(this)}>Logout</Nav.Link>
                         }
+                        <Nav.Link href="/tracker/faq" onClick={this.redirect.bind(this, '/tracker/faq')}>FAQ</Nav.Link>
                     </Nav>
                     <Currency />
                 </Navbar.Collapse>

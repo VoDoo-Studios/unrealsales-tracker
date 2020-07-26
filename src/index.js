@@ -21,6 +21,7 @@ import Reset from './pages/ResetPasswordPage/reset'
 import ExtAdd from './pages/ExtAddPage/extadd';
 import Terms from './pages/TermsPage/terms';
 import ChangePassword from './pages/ChangePasswordPage/changePassword';
+import Faq from './pages/Faq/faq';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -73,6 +74,7 @@ ReactDOM.render(
                 <Route exact path="/tracker/change-password" component={ChangePassword}/>
                 <Route exact path="/tracker/add" component={ExtAdd}/>
                 <Route exact path="/tracker/terms-conditions" component={Terms}/>
+                <Route exact path="/tracker/faq" component={Faq}/>
             </Switch>
         </Router>
     </Provider>,
