@@ -27,7 +27,7 @@ class MainPage extends React.PureComponent {
                                 <Card.Title>Easy to use</Card.Title>
                                 <Card.Text>
                                     With our Bookmarklet you can easily add any product from the marketplace
-                                    to your list
+                                    to your list.
                                 </Card.Text>
                             </Card.Body>
                         </Card>
@@ -38,7 +38,7 @@ class MainPage extends React.PureComponent {
                                 <Card.Title>Track prices</Card.Title>
                                 <Card.Text>
                                     We monitor the prices daily,
-                                    when the price drops, you get notified
+                                    when the price drops, you get notified.
                                 </Card.Text>
                             </Card.Body>
                         </Card>
