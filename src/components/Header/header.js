@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Navbar, Nav } from 'react-bootstrap';
 import Currency from '../Currency/currency';
+import ListSelector from '../ListSelector/listselector';
 import './header.css';
 
 const mapStateToProps = (state) => {
@@ -43,7 +44,12 @@ class Header extends React.PureComponent {
                             <Nav.Link href="" onClick={this.logout.bind(this)}>Logout</Nav.Link>
                         }
                     </Nav>
-                    <Currency />
+                    {userToken &&
+                        <>
+                            <ListSelector />
+                            <Currency />
+                        </>
+                    }
                 </Navbar.Collapse>
             </Navbar>
         )

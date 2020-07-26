@@ -52,3 +52,9 @@ export const getCurrencyRates = (baseRate) => {
         })
     }
 }
+export const setSelectedList = (listId) => {
+    return {
+        type: 'SET_SELECTED_LIST',
+        listId,
+    }
+} 

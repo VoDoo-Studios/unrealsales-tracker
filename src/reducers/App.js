@@ -28,6 +28,11 @@ const app = (state = {}, data) => {
                 ...state,
                 rates: data.rates,
             }
+        case 'SET_SELECTED_LIST':
+            return {
+                ...state,
+                list: data.listId,
+            }
         default:
             return state;
     }
