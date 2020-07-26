@@ -32,6 +32,7 @@ class Header extends React.PureComponent {
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto">
                         <Nav.Link href="/tracker/" onClick={this.redirect.bind(this, '/tracker/')}>Tracker</Nav.Link>
+                        <Nav.Link href="/tracker/faq" onClick={this.redirect.bind(this, '/tracker/faq')}>FAQ</Nav.Link>
                         {!userToken && 
                             <>
                                 <Nav.Link href="/tracker/login" onClick={this.redirect.bind(this, '/tracker/login')}>Login</Nav.Link>
@@ -41,7 +42,6 @@ class Header extends React.PureComponent {
                         {userToken &&
                             <Nav.Link href="" onClick={this.logout.bind(this)}>Logout</Nav.Link>
                         }
-                        <Nav.Link href="/tracker/faq" onClick={this.redirect.bind(this, '/tracker/faq')}>FAQ</Nav.Link>
                     </Nav>
                     <Currency />
                 </Navbar.Collapse>
