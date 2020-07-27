@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Modal, Button, Spinner, Dropdown } from 'react-bootstrap';
+import { Modal, Button, Dropdown, Spinner } from 'react-bootstrap';
 
 import { setProcessingForm } from '../../actions/appActions';
-import { removeProductFromList, getLists } from '../../actions/listsActions';
+import { removeProductFromList, getLists, addProductToList } from '../../actions/listsActions';
 import { selectLists, selectSelectedList, selectList } from '../../selectors/lists';
 
 const mapDispatchToProps = (dispatch) => {
@@ -11,6 +11,7 @@ const mapDispatchToProps = (dispatch) => {
         setProcessingForm: (form, value) => dispatch(setProcessingForm(form, value)),
         removeProductFromList: (slug, listId) => dispatch(removeProductFromList(slug, listId)),
         getLists: () => dispatch(getLists()),
+        addProductToList: (slug, listId) => dispatch(addProductToList(slug, listId)),
     }
 }
 const mapStateToProps = (state, ownProps) => {
@@ -47,21 +48,21 @@ class MoveToList extends React.PureComponent {
         })
     }
 
-    async onMove() {
-        const { slug, selectedList, removeProductFromList, setProcessingForm, getLists } = this.props;
+    async onMove(listId) {
+        const { slug, selectedList, removeProductFromList, getLists, addProductToList, setProcessingForm } = this.props;
         setProcessingForm('movingProduct', true);
         await removeProductFromList(slug, selectedList);
+        await addProductToList(slug, listId);
         await getLists();
-        window.gtag('event', 'tracker', { 'type': 'move', 'slug': slug })
+        window.gtag('event', 'tracker', { 'type': 'move', 'slug': slug });
         setProcessingForm('movingProduct', false);
-    }
-
-    onSelect() {
-
+        this.setState({
+            moveConfirmation: false,
+        });
     }
 
     render() {
-        const { product, isProcessing, list, lists } = this.props;
+        const { product, list, lists, isProcessing } = this.props;
         return (
             <>
                 <a
@@ -74,14 +75,18 @@ class MoveToList extends React.PureComponent {
                 <Modal show={this.state.moveConfirmation} onHide={this.showMoveConfirmation.bind(this)}>
                     <Modal.Body>
                         <p>Where should I move <b>{product.title}</b>?.</p>
-                        <Dropdown onSelect={this.onSelect.bind(this)} className="list-selector">
+                        <Dropdown onSelect={this.onMove.bind(this)} className="list-selector" disabled={isProcessing}>
                             <Dropdown.Toggle variant="primary">
+                                {isProcessing &&
+                                    <Spinner animation="grow" size="sm" variant="warning" />
+                                }
                                 {list.listName}
                             </Dropdown.Toggle>
 
                             <Dropdown.Menu>
                                 {
                                     Object.keys(lists).map((key) => {
+                                        if(lists[key].listId === list.listId) return false;
                                         return (<Dropdown.Item key={lists[key].listId} eventKey={lists[key].listId}>{lists[key].listName}</Dropdown.Item>);
                                     })
                                 }
@@ -91,12 +96,6 @@ class MoveToList extends React.PureComponent {
 
                     <Modal.Footer>
                         <Button variant="secondary" onClick={this.showMoveConfirmation.bind(this)}>Cancel</Button>
-                        <Button variant="primary" onClick={this.onMove.bind(this)} disabled={isProcessing}>
-                            {isProcessing &&
-                                <Spinner animation="grow" size="sm" variant="warning" />
-                            }
-                            Move
-                        </Button>
                     </Modal.Footer>
                 </Modal>
             </>
