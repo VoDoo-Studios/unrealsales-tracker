@@ -8,6 +8,7 @@
     right: 40px;
     position: absolute;
     color: red;
+    cursor: pointer;
 }
 .list-manager__new {
     border-top: 1px #ccc solid;
