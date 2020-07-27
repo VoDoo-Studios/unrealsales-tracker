@@ -49,7 +49,8 @@ class ListManager extends React.PureComponent {
         setProcessingForm('operateList', false);
     }
     async onDelete(list) {
-        const { removeList, setProcessingForm } = this.props;
+        const { removeList, setProcessingForm, lists } = this.props;
+        if (Object.keys(lists).length === 1) return alert('You must have at least 1 list!');
         if (!window.confirm("Are you sure you want to remove list " + list.listName)) return;
 
         setProcessingForm('operateList', true);
