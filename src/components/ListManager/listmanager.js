@@ -25,6 +25,12 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 class ListManager extends React.PureComponent {
+    constructor() {
+        super();
+        this.state = {
+            createListInput: '',
+        }
+    }
     onCreateListInputChange(event) {
         this.setState({
             createListInput: event.target.value,
@@ -37,6 +43,9 @@ class ListManager extends React.PureComponent {
         setProcessingForm('operateList', true);
         window.gtag('event', 'tracker', {'type': 'create-list'})
         await createList(this.state.createListInput);
+        this.setState({
+            createListInput: '',
+        });
         setProcessingForm('operateList', false);
     }
     async onDelete(list) {
@@ -72,7 +81,7 @@ class ListManager extends React.PureComponent {
                         })
                     }
                     <InputGroup className="list-manager__new">
-                        <Form.Control type="text" placeholder="My new project" onChange={this.onCreateListInputChange.bind(this)}/>
+                        <Form.Control type="text" placeholder="My new project" onChange={this.onCreateListInputChange.bind(this)} value={this.state.createListInput}/>
                         <InputGroup.Append>
                             <Button variant="primary" onClick={this.onCreate.bind(this)} disabled={isProcessing}>
                                 {isProcessing &&
