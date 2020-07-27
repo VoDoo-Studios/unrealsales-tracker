@@ -48,8 +48,8 @@ class ListSelector extends React.PureComponent {
         }
     }
     componentDidUpdate() {
-        const { lists, selectedList, setSelectedList } = this.props;
-        if (!selectedList && Object.keys(lists).length > 0) setSelectedList(lists[0].listId);
+        const { list, lists, setSelectedList } = this.props;
+        if (!Object.keys(list).length > 0 && Object.keys(lists).length > 0) setSelectedList(lists[0].listId);
     }
     onSelect(eventKey) {
         const { setSelectedList } = this.props;

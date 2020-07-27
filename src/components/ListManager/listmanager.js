@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Modal, Button, Badge, InputGroup, Form, Spinner } from 'react-bootstrap';
 import { createList, removeList } from '../../actions/listsActions';
 import { setProcessingForm } from '../../actions/appActions';
-import { selectLists, selectSelectedList, selectList } from '../../selectors/lists';
+import { selectLists } from '../../selectors/lists';
 import { FaTrashAlt } from 'react-icons/fa';
 
 import './listmanager.css';
@@ -11,12 +11,8 @@ import './listmanager.css';
 const mapStateToProps = (state) => {
     const isProcessing = (state.app.processing && state.app.processing.operateList) || false;
     const lists = selectLists(state);
-    const selectedList = selectSelectedList(state);
-    const list = selectList(state, selectedList);
     return {
         lists,
-        selectedList,
-        list,
         isProcessing,
     }
 };
@@ -46,8 +42,9 @@ class ListManager extends React.PureComponent {
     async onDelete(list) {
         const { removeList, setProcessingForm } = this.props;
         if (!window.confirm("Are you sure you want to remove list " + list.listName)) return;
+
         setProcessingForm('operateList', true);
-        window.gtag('event', 'tracker', {'type': 'delete-list'})
+        window.gtag('event', 'tracker', {'type': 'delete-list'});
         await removeList(list.listId);
         setProcessingForm('operateList', false);
     }

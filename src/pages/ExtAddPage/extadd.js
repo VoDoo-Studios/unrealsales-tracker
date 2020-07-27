@@ -72,7 +72,6 @@ class ExtAdd extends React.PureComponent {
     async componentDidUpdate(prevProps) {
         const { lists, listId, addProduct, addProductToList, setSelectedList } = this.props;
         const { slug, url } = this.state;
-        console.log(listId, lists, prevProps.listId, lists[0].listId);
         if (!listId && Object.keys(lists).length > 0) setSelectedList(lists[0].listId);
 
         if (!this.state.added && listId && slug) {
