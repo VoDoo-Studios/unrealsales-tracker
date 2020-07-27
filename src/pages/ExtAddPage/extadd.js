@@ -2,8 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Container, Row, Col, Spinner } from 'react-bootstrap';
 import { getLists, addProductToList } from '../../actions/listsActions';
-import { setProcessingForm } from '../../actions/appActions';
+import { setProcessingForm, setSelectedList } from '../../actions/appActions';
 import { postProduct } from '../../actions/productsActions';
+import { selectLists, selectSelectedList, selectList } from '../../selectors/lists';
 
 import Header from '../../components/Header/header';
 
@@ -15,16 +16,23 @@ const mapDispatchToProps = (dispatch) => {
         getLists: () => dispatch(getLists()),
         addProduct: (slug) => dispatch(postProduct(slug)),
         addProductToList: (slug, list) => dispatch(addProductToList(slug, list)),
+        setSelectedList: (listId) => {
+            dispatch(setSelectedList(listId));
+        },
     }
 }
 
 const mapStateToProps = (state) => {
     const userToken = state.app.userToken;
-    const listId = (state.lists && Object.keys(state.lists).length > 0 && state.lists[0].listId) || false;
+    const listId = selectSelectedList(state);
+    const list = selectList(state, listId);
+    const lists = selectLists(state);
 
     return {
         userToken,
         listId,
+        lists,
+        list,
     };
 };
 
@@ -35,10 +43,11 @@ class ExtAdd extends React.PureComponent {
             invalidLink: false,
             slug: false,
             url: false,
+            added: false,
         }
     }
-    componentDidMount() {
-        const { userToken, listId, getLists } = this.props;
+    async componentDidMount() {
+        const { userToken, listId, getLists, lists } = this.props;
         const  { slug, url } = this.getUrlParameter('product');
         if (!slug || !url) {
             this.setState({
@@ -50,9 +59,8 @@ class ExtAdd extends React.PureComponent {
         if (!userToken) {
             return window.tracker.appHistory.push('/tracker/login/?product=' + url);
         }
-
-        if (!listId) {
-            getLists();
+        if (!listId || Object.keys(lists).length === 0) {
+           await getLists();
         }
 
         this.setState({
@@ -62,18 +70,21 @@ class ExtAdd extends React.PureComponent {
         })
     }
     async componentDidUpdate(prevProps) {
-        const { listId, addProduct, addProductToList } = this.props;
+        const { lists, listId, addProduct, addProductToList, setSelectedList } = this.props;
         const { slug, url } = this.state;
+        console.log(listId, lists, prevProps.listId, lists[0].listId);
+        if (!listId && Object.keys(lists).length > 0) setSelectedList(lists[0].listId);
 
-        if (listId !== prevProps.listId) {
+        if (!this.state.added && listId && slug) {
             await addProduct(slug);
             await addProductToList(slug, listId);
+            this.setState({added: true});
             window.gtag('event', 'add_product', {'method': 'external'});
             window.location = url;
         }
     }
     render() {
-        const { userToken } = this.props;
+        const { userToken, list } = this.props;
         const { slug, url, invalidLink } = this.state;
         if (!userToken) {
             return null;
@@ -94,7 +105,7 @@ class ExtAdd extends React.PureComponent {
                     <Row>
                         <Col md={12} className="extadd-page__text">
                             <h5>
-                                We're adding the product in your list ({slug})&nbsp; 
+                                We're adding the product({slug}) to list {list.listName}&nbsp; 
                                 <small>
                                     and redirect you back to <a href={url}>{url}</a> once complete!
                                 </small>
