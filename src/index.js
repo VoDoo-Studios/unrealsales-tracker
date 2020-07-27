@@ -26,7 +26,7 @@ import Faq from './pages/Faq/faq';
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 if (!window.location.host.startsWith('www')){
-    window.location = window.location.protocol + '//www.' + window.location.host + window.location.pathname;
+    window.location = window.location.protocol + '//www.' + window.location.host + window.location.pathname + window.location.search;
 }
 
 // Rehydrate currency rates that are not older than 24 hours
