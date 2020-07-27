@@ -25,6 +25,10 @@ import Faq from './pages/Faq/faq';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
+if (!window.location.host.startsWith('www')){
+    window.location = window.location.protocol + '//www.' + window.location.host + window.location.pathname;
+}
+
 // Rehydrate currency rates that are not older than 24 hours
 let parsedRates = JSON.parse(localStorage.getItem('rates'));
 const rates = parsedRates && Object.keys(parsedRates)
