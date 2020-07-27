@@ -36,14 +36,6 @@ class Faq extends React.PureComponent {
                                 </Accordion.Collapse>
                             </Card>
                             <Card>
-                                <Accordion.Toggle as={Card.Header} eventKey="2">
-                                How often will I get sale notifications?
-                                </Accordion.Toggle>
-                                <Accordion.Collapse eventKey="2">
-                                <Card.Body>We refresh our product database with Epic's every 3 days, at that point if you have any items that went on sale you will receive a notification.</Card.Body>
-                                </Accordion.Collapse>
-                            </Card>
-                            <Card>
                                 <Accordion.Toggle as={Card.Header} eventKey="3">
                                 I've noticed that the products in my wishlist for my currency does not reflect the same price as in the marketplace, why is that?
                                 </Accordion.Toggle>
