@@ -25,3 +25,6 @@ code {
 .spinner-grow-sm {
   margin-right: 0.5rem;
 }
+.dropdown-toggle::after {
+  margin-left: .75rem;
+}

@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Navbar, Nav } from 'react-bootstrap';
+import { FaTwitter } from 'react-icons/fa';
 import Currency from '../Currency/currency';
 import ListSelector from '../ListSelector/listselector';
 import './header.css';
@@ -52,6 +53,7 @@ class Header extends React.PureComponent {
                             <Currency />
                         </>
                     }
+                    <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/VoDooSolutions"><FaTwitter size="24" className="unreal-tracker__twitter"/></a>
                 </Navbar.Collapse>
             </Navbar>
         )

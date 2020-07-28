@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Container } from 'react-bootstrap';
+import { FaTwitter } from 'react-icons/fa';
 
 import Header from '../../components/Header/header';
 import Grid from '../../components/Grid/grid';
@@ -40,6 +41,7 @@ class Tracker extends React.PureComponent {
                 <div className="tracker-footer">
                     Need of support? create an issue <a target="_blank" rel="noopener noreferrer" href="https://github.com/CGeorges/unrealsales-tracker/issues">here</a>. 
                     This project is OpenSource, feel free to <a target="_blank" rel="noopener noreferrer" href="https://github.com/CGeorges/unrealsales-tracker">contribute</a>.
+                    Follow us on <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/VoDooSolutions"><FaTwitter /></a>
                 </div>
             </Container>
         )
