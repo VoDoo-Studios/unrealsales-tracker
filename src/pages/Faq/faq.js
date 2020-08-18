@@ -32,7 +32,7 @@ class Faq extends React.PureComponent {
                                 How often will I get sale notifications?
                                 </Accordion.Toggle>
                                 <Accordion.Collapse eventKey="1">
-                                <Card.Body>We refresh our product database with Epic's every 3 days, at that point if you have any items that went on sale you will receive a notification.</Card.Body>
+                                <Card.Body>We refresh our product database with Epic's every day, at that point if you have any items that went on sale you will receive a notification.</Card.Body>
                                 </Accordion.Collapse>
                             </Card>
                             <Card>
