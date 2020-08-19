@@ -58,4 +58,11 @@ export const setSelectedList = (listId) => {
         type: 'SET_SELECTED_LIST',
         listId,
     }
-} 
+}
+export const setTwitterCTAState = (state) => {
+    localStorage.setItem('twitterCTAState', state);
+    return {
+        type: 'SET_TWITTERCTA_STATE',
+        twitterCTAState: state,
+    };
+}

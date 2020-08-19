@@ -33,6 +33,11 @@ const app = (state = {}, data) => {
                 ...state,
                 list: data.listId,
             }
+        case 'SET_TWITTERCTA_STATE':
+            return {
+                ...state,
+                twitterCTAState: data.twitterCTAState,
+            }
         default:
             return state;
     }

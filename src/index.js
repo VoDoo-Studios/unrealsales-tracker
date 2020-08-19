@@ -48,6 +48,7 @@ const persistedState = {
         currency: localStorage.getItem('currency'),
         rates: rates,
         list: localStorage.getItem('listId'),
+        twitterCTAState: localStorage.getItem('twitterCTAState'),
     }
 };
 
