@@ -36,6 +36,16 @@ class Faq extends React.PureComponent {
                                 </Accordion.Collapse>
                             </Card>
                             <Card>
+                                <Accordion.Toggle as={Card.Header} eventKey="2">
+                                    Can I see a preview of how can I use UnrealSales?
+                                </Accordion.Toggle>
+                                <Accordion.Collapse eventKey="2">
+                                    <Card.Body>
+                                        <Image src="/unrealsalesoverview.gif" alt="How UnrealSales works" fluid/>
+                                    </Card.Body>
+                                </Accordion.Collapse>
+                            </Card>
+                            <Card>
                                 <Accordion.Toggle as={Card.Header} eventKey="3">
                                     I've noticed that the products in my wishlist for my currency does not reflect the same price as in the marketplace, why is that?
                                 </Accordion.Toggle>
@@ -68,11 +78,6 @@ class Faq extends React.PureComponent {
                                 </Accordion.Collapse>
                             </Card>
                         </Accordion>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col>
-                        <Image src="/unrealsalesoverview.gif" alt="How UnrealSales works" fluid/>
                     </Col>
                 </Row>
             </Container>
