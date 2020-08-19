@@ -5,3 +5,10 @@
 .faq-page > .row {
     margin-top:40px
 }
+.faq-page .card-header {
+    cursor: pointer;
+}
+.faq-page .card-header {
+    background-color: rgb(60 55 55);
+    color:#fff;
+}
