@@ -37,7 +37,7 @@ export const setCurrencyRate = (baseRate, rates) => {
 }
 export const getCurrencyRates = (baseRate) => {
     return (dispatch) => {
-        return fetch('https://api.exchangeratesapi.io/latest?base=' + baseRate, {
+        return fetch('http://data.fixer.io/latest?access_key=b2112a5cbc6430aed5eb6756d633718b&base=' + baseRate, {
             method: 'GET',
         })
         .then(response => {
