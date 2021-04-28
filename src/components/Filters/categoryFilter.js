@@ -25,8 +25,8 @@ const mapStateToProps = (state) => {
     
     // Retrieve categories from already filtered products
     const categories = [...new Set(Object.keys(filteredProducts).map((product) => {
-        return filteredProducts[product].categories[0].name;
-    }))];
+        return filteredProducts[product]?.categories[0]?.name;
+    }).filter((cat) => cat !== undefined))];
     return {
         categories,
         filters,
