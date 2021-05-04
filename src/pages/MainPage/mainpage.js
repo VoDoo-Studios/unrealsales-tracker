@@ -1,9 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Container, Jumbotron, Card, Badge, Row, Col } from 'react-bootstrap';
+import { FaTwitter } from 'react-icons/fa';
 
 import Header from '../../components/Header/header';
 import imgOverview from '../../images/overview.png';
+import imgMegagrants from '../../images/megagrants.svg';
 
 import './mainpage.css';
 
@@ -102,7 +104,18 @@ class MainPage extends React.PureComponent {
                         }}>create a free account</a>
                     </h2>
                 </Row>
-
+                <Row className="main-page__footer">
+                    <Col lg={10} sm={12}>
+                        <div className="tracker-footer">
+                            Need of support? create an issue <a target="_blank" rel="noopener noreferrer" href="https://github.com/CGeorges/unrealsales-tracker/issues">here</a>. 
+                            This project is OpenSource, feel free to <a target="_blank" rel="noopener noreferrer" href="https://github.com/CGeorges/unrealsales-tracker">contribute</a>.
+                            Follow us on <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/VoDooSolutions"><FaTwitter /></a>
+                        </div>
+                    </Col>
+                    <Col lg={2} sm={12} className="main-page__megagrants">
+                        <img src={imgMegagrants} alt="Epic MegaGrants recipient"/>
+                    </Col>
+                </Row>
 
             </Container>
         )

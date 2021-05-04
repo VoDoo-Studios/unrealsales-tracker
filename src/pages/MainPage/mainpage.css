@@ -22,3 +22,12 @@
 .main-page .col-sm-12 {
     margin-top:20px;
 }
+.main-page__footer{
+    padding-bottom:40px;
+}
+.main-page__megagrants {
+    display:flex;
+}
+.main-page__megagrants img {
+    max-width:200px;
+}
