@@ -109,7 +109,7 @@ class MainPage extends React.PureComponent {
                         <div className="tracker-footer">
                             Need of support? create an issue <a target="_blank" rel="noopener noreferrer" href="https://github.com/CGeorges/unrealsales-tracker/issues">here</a>. 
                             This project is OpenSource, feel free to <a target="_blank" rel="noopener noreferrer" href="https://github.com/CGeorges/unrealsales-tracker">contribute</a>.
-                            Follow us on <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/VoDooSolutions"><FaTwitter /></a>
+                            Follow us on <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/VoDooStudios"><FaTwitter /></a>
                         </div>
                     </Col>
                     <Col lg={2} sm={12} className="main-page__megagrants">

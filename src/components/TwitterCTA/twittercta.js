@@ -28,7 +28,7 @@ class TwitterCTA extends React.PureComponent {
         const { setTwitterCTAState } = this.props;
 
         setTwitterCTAState(true);
-        window.location.href = 'https://twitter.com/VoDooSolutions?ref_src=twsrc%5Etfw';
+        window.location.href = 'https://twitter.com/VoDooStudios?ref_src=twsrc%5Etfw';
     }
     render() {
         const { hide } = this.props;

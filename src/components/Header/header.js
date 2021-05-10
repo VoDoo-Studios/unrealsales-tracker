@@ -53,7 +53,7 @@ class Header extends React.PureComponent {
                             <Currency />
                         </>
                     }
-                    <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/VoDooSolutions"><FaTwitter size="24" className="unreal-tracker__twitter"/></a>
+                    <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/VoDooStudios"><FaTwitter size="24" className="unreal-tracker__twitter"/></a>
                 </Navbar.Collapse>
             </Navbar>
         )
