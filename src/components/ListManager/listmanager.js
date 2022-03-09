@@ -66,7 +66,7 @@ class ListManager extends React.PureComponent {
                     <Modal.Title>Manage lists</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    {Object.keys(lists).map((listKey) => {
+                    {Object.keys(lists).sort((a,b)=> lists[a].listName.localeCompare(lists[b].listName)).map((listKey) => {
                             return (
                                 <p key={listKey} className="list-manager__item">
                                     {lists[listKey].listName}

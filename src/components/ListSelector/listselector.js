@@ -75,7 +75,7 @@ class ListSelector extends React.PureComponent {
 
                     <Dropdown.Menu>
                         {
-                            Object.keys(lists).map((key) => {
+                            Object.keys(lists).sort((a,b)=> lists[a].listName.localeCompare(lists[b].listName)).map((key) => {
                                 return (<Dropdown.Item key={lists[key].listId} eventKey={lists[key].listId}>{lists[key].listName}</Dropdown.Item>);
                             })
                         }
