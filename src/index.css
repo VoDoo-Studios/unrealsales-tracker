@@ -1,12 +1,11 @@
 body {
   margin: 0;
-  font-family: "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  font-family: "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color:#575757;
-  background-image: url(/ue-background.jpg);
+  color: #575757;
+  background-image: url(../public/ue-background.jpg);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -19,12 +18,12 @@ code {
   background-color: #fff;
 }
 .container > .row {
-  padding-left:40px;
-  padding-right:40px;
+  padding-left: 40px;
+  padding-right: 40px;
 }
 .spinner-grow-sm {
   margin-right: 0.5rem;
 }
 .dropdown-toggle::after {
-  margin-left: .75rem;
+  margin-left: 0.75rem;
 }
